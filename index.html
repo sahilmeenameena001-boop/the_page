@@ -15,7 +15,7 @@
     <meta property="og:description" content="Millbridge Court, an exclusive use wedding venue in Surrey, a modern luxury wedding barn with a choice of rooms &amp; wedding planning team." />
     <meta property="og:url" content="https://www.millbridgecourt.co.uk/" />
     <meta property="og:site_name" content="Millbridge Court" />
-    <meta property="article:modified_time" content="2026-07-24T09:20:04+00:00" />
+    <meta property="article:modified_time" content="2026-07-27T15:18:25+00:00" />
     <meta property="og:image" content="https://www.millbridgecourt.co.uk/wp-content/uploads/2026/03/MariellLindHansen-2252-1-scaled.jpg" />
     <meta property="og:image:width" content="2560" />
     <meta property="og:image:height" content="1708" />
@@ -40,7 +40,7 @@
                 },
                 "thumbnailUrl": "https:\/\/www.millbridgecourt.co.uk\/wp-content\/uploads\/2026\/03\/MariellLindHansen-2252-1-scaled.jpg",
                 "datePublished": "2019-02-25T13:07:10+00:00",
-                "dateModified": "2026-07-24T09:20:04+00:00",
+                "dateModified": "2026-07-27T15:18:25+00:00",
                 "description": "Millbridge Court, an exclusive use wedding venue in Surrey, a modern luxury wedding barn with a choice of rooms & wedding planning team.",
                 "breadcrumb": {
                     "@id": "https:\/\/www.millbridgecourt.co.uk\/#breadcrumb"
@@ -734,18 +734,35 @@
     <link rel='stylesheet' id='contact-form-7-css' href='https://www.millbridgecourt.co.uk/wp-content/cache/autoptimize/autoptimize_single_b2b463a5bdb73833be2a6afbc1843ddd.php?ver=6.1.6' media='all' />
     <link rel='stylesheet' id='eic_public-css' href='https://www.millbridgecourt.co.uk/wp-content/cache/autoptimize/autoptimize_single_f3f3ff9f052f8a09e153166d10228f32.php?ver=2.0.0' media='screen' />
     <link rel='stylesheet' id='wpcf7-redirect-script-frontend-css' href='https://www.millbridgecourt.co.uk/wp-content/cache/autoptimize/autoptimize_single_f7b23dc61faf57c6168b516c4ebac487.php?ver=2c532d7e2be36f6af233' media='all' />
-    <link rel='stylesheet' id='styles-css' href='https://www.millbridgecourt.co.uk/wp-content/cache/autoptimize/autoptimize_single_39b8d40a45d9d580b692e43bbe039b30.php?ver=1777533160' media='all' />
+    <link rel='stylesheet' id='styles-css' href='https://www.millbridgecourt.co.uk/wp-content/cache/autoptimize/autoptimize_single_abd6eaa6e3aae75ddec01de915b5619a.php?ver=1785325061' media='all' />
     <link rel="https://api.w.org/" href="https://www.millbridgecourt.co.uk/wp-json/" />
     <link rel="alternate" title="JSON" type="application/json" href="https://www.millbridgecourt.co.uk/wp-json/wp/v2/pages/9" />
     <link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://www.millbridgecourt.co.uk/xmlrpc.php?rsd" />
     <meta name="generator" content="WordPress 7.0.2" />
     <link rel='shortlink' href='https://www.millbridgecourt.co.uk/' />
+    <script defer src="https://www.googletagmanager.com/gtag/js?id=G-F3X5WEHELL"></script>
+    <script defer src="data:text/javascript;base64,CiAgICB3aW5kb3cuZGF0YUxheWVyID0gd2luZG93LmRhdGFMYXllciB8fCBbXTsKICAgIGZ1bmN0aW9uIGd0YWcoKXtkYXRhTGF5ZXIucHVzaChhcmd1bWVudHMpO30KCiAgICBndGFnKCdqcycsIG5ldyBEYXRlKCkpOwoKICAgIC8vIPCflKUgSEFSRCBGSVggRk9SIElOVkFMSUQgRE9NQUlOIENPT0tJRQogICAgZ3RhZygnY29uZmlnJywgJ0ctRjNYNVdFSEVMTCcsIHsKICAgICAgICBjb29raWVfZG9tYWluOiAnLm1pbGxicmlkZ2Vjb3VydC5jby51aycKICAgIH0pOwogICAg"></script>
+    <style type="text/css">
+        .eic-image .eic-image-caption {
+            bottom: 0;
+            left: 0;
+            right: 0;
+            text-align: left;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 1);
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+    </style>
     <script>
         (function() {
 
+            var SSA_ADS_ON = true;
+            var SSA_GOAL_PATTERNS = [];
             var SSA_STORE = 'ssa_client_sid_v1';
             var SSA_CK = 'ssa_csid';
             var SSA_WN = 'SSA1';
+            var SSA_LAST = 'ssa_last_active_v1';
+            var SESSION_TIMEOUT_MS = 30 * 60 * 1000;
             var fromServer = "";
 
             function ssaLsGet(k) {
@@ -826,7 +843,7 @@
              * Multiple stores + cookie + window.name. fromServer = PHP reading ssa_csid on this request
              * (Firefox may clear storage on navigation but still send the first-party cookie).
              */
-            var fromPhp = "b03d273e-136b-4739-bbdb-659b0264ba40";
+            var fromPhp = "9009d45e-b4a4-421d-b516-4cd22bb08fbb";
             var sessionId = ssaLsGet(SSA_STORE) || ssaSsGet(SSA_STORE) || ssaCkGet(SSA_CK) || ssaWnGet();
             if (!ssaSidValid(sessionId) && ssaSidValid(fromServer)) {
                 sessionId = fromServer;
@@ -834,7 +851,47 @@
             if (!ssaSidValid(sessionId)) {
                 sessionId = ssaSidValid(fromPhp) ? fromPhp : ssaRandomSid();
             }
+            /*
+             * Session timeout (industry-standard 30 min idle): if the previous ping was more than
+             * 30 minutes ago, this is a NEW journey — mint a fresh session id so the old journey
+             * doesn't keep growing. 29 min away = same journey; 31 min = new journey.
+             */
+            function ssaLastActiveNow() {
+                return Date.now();
+            }
+
+            function ssaLastActiveGet() {
+                try {
+                    var v = parseInt(ssaLsGet(SSA_LAST) || '0', 10) || 0;
+                    return v > 0 ? v : 0;
+                } catch (e) {
+                    return 0;
+                }
+            }
+
+            function ssaLastActiveSet(ts) {
+                try {
+                    ssaLsSet(SSA_LAST, String(ts));
+                    ssaSsSet(SSA_LAST, String(ts));
+                } catch (e) {}
+            }
+            var lastActiveTs = ssaLastActiveGet();
+            if (lastActiveTs > 0 && (ssaLastActiveNow() - lastActiveTs) > SESSION_TIMEOUT_MS) {
+                sessionId = ssaRandomSid();
+            }
             ssaPersistSid(sessionId);
+            ssaLastActiveSet(ssaLastActiveNow());
+
+            /*
+             * Navigation type (back/forward vs fresh navigate vs reload). A browser Back/Forward
+             * button is NOT a new discovery — we suppress the journey trail append for it.
+             */
+            var navType = 'navigate';
+            try {
+                var nt = performance.getEntriesByType('navigation');
+                if (nt && nt.length && nt[0].type) navType = String(nt[0].type) || 'navigate';
+            } catch (e) {}
+            var isBackForwardNav = (navType === 'back_forward');
 
             const page = window.location.pathname;
             const pageUrl = (window.location.pathname || '/') + (window.location.search || '');
@@ -871,6 +928,28 @@
              */
             let maxScrollDepth = 0;
             /*
+             * GA4-style depth thresholds crossed this session (25 / 50 / 75 / 90 %). A set, sent
+             * as a comma-joined string; server stores the union via a set-merge. Lets the dashboard
+             * show how far people actually read instead of only the session max.
+             */
+            var depthThresholds = [25, 50, 75, 90];
+            var crossedThresholds = {};
+
+            function noteThresholds(pct) {
+                if (typeof pct !== 'number') return;
+                for (var i = 0; i < depthThresholds.length; i++) {
+                    if (pct >= depthThresholds[i]) crossedThresholds[String(depthThresholds[i])] = 1;
+                }
+            }
+
+            function thresholdString() {
+                var keys = [];
+                for (var i = 0; i < depthThresholds.length; i++) {
+                    if (crossedThresholds[String(depthThresholds[i])]) keys.push(String(depthThresholds[i]));
+                }
+                return keys.join(',');
+            }
+            /*
              * depthLayoutReady gates the "page fits the viewport → 100%" baseline reading until
              * AFTER the page has fully loaded and late layout (images without width/height, web
              * fonts, lazy-loaded blocks) has settled. Without this gate the very first measurement
@@ -882,19 +961,42 @@
              */
             let depthLayoutReady = false;
 
-            function measureScrollDepth() {
+            function measureScrollDepth(evt) {
                 try {
                     var doc = document.documentElement;
                     var body = document.body;
                     var scrollTop = window.scrollY || window.pageYOffset ||
                         (doc && doc.scrollTop) || (body && body.scrollTop) || 0;
-                    var viewport = window.innerHeight || (doc && doc.clientHeight) || 0;
-                    var full = Math.max(
-                        (body && body.scrollHeight) || 0,
-                        (doc && doc.scrollHeight) || 0,
-                        (body && body.offsetHeight) || 0,
-                        (doc && doc.offsetHeight) || 0
-                    );
+                    /*
+                     * When the actual scrollable element is a child div (e.g. a standalone
+                     * menu page with overflow-y:auto on <main>), window.scrollY stays 0
+                     * even though the user has scrolled. Walk up from the scroll event
+                     * target to find the element that actually moved.
+                     */
+                    var scrollEl = null;
+                    if (scrollTop === 0 && evt && evt.target) {
+                        var walk = evt.target;
+                        while (walk && walk !== document && walk !== document.documentElement && walk !== document.body) {
+                            var st = walk.scrollTop || 0;
+                            if (st > 0 || walk.scrollHeight > walk.clientHeight + 5) {
+                                scrollTop = st;
+                                scrollEl = walk;
+                                break;
+                            }
+                            walk = walk.parentElement || walk.parentNode;
+                        }
+                    }
+                    var viewport = scrollEl ?
+                        scrollEl.clientHeight :
+                        (window.innerHeight || (doc && doc.clientHeight) || 0);
+                    var full = scrollEl ?
+                        scrollEl.scrollHeight :
+                        Math.max(
+                            (body && body.scrollHeight) || 0,
+                            (doc && doc.scrollHeight) || 0,
+                            (body && body.offsetHeight) || 0,
+                            (doc && doc.offsetHeight) || 0
+                        );
                     if (full <= 0 || viewport <= 0) return null;
                     var pct = Math.round(((scrollTop + viewport) / full) * 100);
                     if (pct < 0) pct = 0;
@@ -908,13 +1010,14 @@
                 }
             }
 
-            function updateScrollDepth() {
-                var m = measureScrollDepth();
+            function updateScrollDepth(evt) {
+                var m = measureScrollDepth(evt);
                 if (!m) return;
                 /* Ignore the pre-settle baseline unless the visitor has actually scrolled. This is
                    what stops a short-lived "page ≈ viewport" reading from pinning everyone at 100%. */
                 if (!depthLayoutReady && !m.scrolled) return;
                 if (m.pct > maxScrollDepth) maxScrollDepth = m.pct;
+                noteThresholds(m.pct);
             }
             window.addEventListener('scroll', updateScrollDepth, {
                 passive: true
@@ -956,6 +1059,7 @@
              * is naturally first-touch; the server keeps it sticky for the session via GREATEST.
              */
             var paidArrival = (function() {
+                if (!SSA_ADS_ON) return 0;
                 try {
                     var qs = (location.search || '').toLowerCase();
                     if (!qs) return 0;
@@ -970,6 +1074,26 @@
                 return 0;
             })();
 
+            /*
+             * UTM campaign tags from the current URL's query string. First-touch: present on the
+             * landing page, absent on later internal navigations — the server keeps the first
+             * non-empty value for the session, so internal pages never blank a real campaign.
+             */
+            var utmInfo = (function() {
+                var out = {
+                    utm_source: '',
+                    utm_medium: '',
+                    utm_campaign: ''
+                };
+                try {
+                    var params = new URLSearchParams(location.search || '');
+                    out.utm_source = (params.get('utm_source') || '').slice(0, 100);
+                    out.utm_medium = (params.get('utm_medium') || '').slice(0, 100);
+                    out.utm_campaign = (params.get('utm_campaign') || '').slice(0, 150);
+                } catch (e) {}
+                return out;
+            })();
+
             var refInfo = (function() {
                 var ref = '';
                 try {
@@ -977,7 +1101,8 @@
                 } catch (e) {}
                 if (!ref) return {
                     from_search: 0,
-                    referrer_host: ''
+                    referrer_host: '',
+                    referrer_url: ''
                 };
                 var h = '';
                 try {
@@ -985,7 +1110,8 @@
                 } catch (e) {}
                 if (!h) return {
                     from_search: 0,
-                    referrer_host: ''
+                    referrer_host: '',
+                    referrer_url: ''
                 };
                 var here = (location.hostname || '').toLowerCase();
                 var stripWww = function(s) {
@@ -994,7 +1120,8 @@
                 if (stripWww(h) === stripWww(here)) {
                     return {
                         from_search: 0,
-                        referrer_host: ''
+                        referrer_host: '',
+                        referrer_url: ''
                     };
                 }
                 var sigs = [
@@ -1009,9 +1136,11 @@
                         break;
                     }
                 }
+                h = h.replace(/^www\./, '').slice(0, 191);
                 return {
                     from_search: fs,
-                    referrer_host: h.slice(0, 191)
+                    referrer_host: h,
+                    referrer_url: String(ref).slice(0, 2048)
                 };
             })();
             /* Paid arrival is independent of the referrer (an ad click may have no referrer). */
@@ -1111,6 +1240,11 @@
             function buildPayload() {
                 tick();
                 updateScrollDepth();
+                /* Refresh the last-active marker only while the tab is visible, so an open-but-idle
+                   tab times out after 30 min of inactivity (matches GA4) instead of staying alive. */
+                if (visible) {
+                    ssaLastActiveSet(ssaLastActiveNow());
+                }
                 var snapshotMs = Math.round(activeTime);
                 var deltaMs = snapshotMs - sentActiveTime;
                 if (deltaMs < 0) deltaMs = 0;
@@ -1120,28 +1254,37 @@
                     session_id: sessionId,
                     page: window.location.pathname,
                     url: u.slice(0, 2000),
+                    nav_type: isBackForwardNav ? 'back_forward' : navType,
                     active_time_ms: deltaMs,
                     /* active_time kept (whole seconds) only so a server running older PHP that hasn't
                        migrated yet still has a numeric field to read. The new server prefers _ms. */
                     active_time: Math.floor(deltaMs / 1000),
                     scrolled: hasScrolled ? 1 : 0,
                     scroll_depth: maxScrollDepth,
+                    scroll_thresholds: thresholdString(),
                     from_search: refInfo.from_search,
                     is_paid: refInfo.is_paid,
-                    referrer_host: refInfo.referrer_host
+                    referrer_host: refInfo.referrer_host,
+                    referrer_url: refInfo.referrer_url || '',
+                    utm_source: utmInfo.utm_source,
+                    utm_medium: utmInfo.utm_medium,
+                    utm_campaign: utmInfo.utm_campaign
                 };
             }
 
             // =========================
             // SCROLL DETECTION (first user-initiated scroll flips the bounce bit)
             // =========================
-            function onFirstScroll() {
+            function onFirstScroll(evt) {
                 if (hasScrolled) return;
                 hasScrolled = true;
                 window.removeEventListener('scroll', onFirstScroll, scrollOpts);
                 window.removeEventListener('wheel', onFirstScroll, scrollOpts);
                 window.removeEventListener('touchmove', onFirstScroll, scrollOpts);
                 window.removeEventListener('keydown', onFirstScrollKey, true);
+                /* Ensure we capture the scroll depth even when a child div scrolls and
+                   the capture-phase listener fires before the bubbling one. */
+                updateScrollDepth(evt);
                 send(buildPayload(), false);
             }
 
@@ -1160,7 +1303,7 @@
                         return;
                     }
                 }
-                onFirstScroll();
+                onFirstScroll(ev);
             }
             var scrollOpts = {
                 passive: true,
@@ -1184,27 +1327,101 @@
             }, 10000);
 
             // =========================
+            // GOAL LINK CLICK TRACKING
+            // Download / media links (e.g. ?ww_download=175) redirect away from WordPress and never
+            // load this page tracker, so a pageview goal can't catch them. Instead we listen for a
+            // click on any link whose href contains a configured goal pattern and fire a goal beacon.
+            // Sent via sendBeacon so it survives the navigation that the download triggers.
+            // =========================
+            function urlHitsGoal(href) {
+                if (!href || !SSA_GOAL_PATTERNS || !SSA_GOAL_PATTERNS.length) return false;
+                var low = String(href).toLowerCase();
+                for (var i = 0; i < SSA_GOAL_PATTERNS.length; i++) {
+                    var p = String(SSA_GOAL_PATTERNS[i] || '').toLowerCase();
+                    if (p && low.indexOf(p) >= 0) return true;
+                }
+                return false;
+            }
+
+            function sendGoal(goalUrl) {
+                var payload = {
+                    session_id: sessionId,
+                    goal_url: String(goalUrl).slice(0, 2000)
+                };
+                var body = JSON.stringify(payload);
+                try {
+                    if (navigator.sendBeacon) {
+                        navigator.sendBeacon(trackUrl, new Blob([body], {
+                            type: 'application/json'
+                        }));
+                        return;
+                    }
+                } catch (e) {}
+                fetch(trackUrl, {
+                    method: 'POST',
+                    body: body,
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    credentials: 'same-origin',
+                    keepalive: true,
+                    cache: 'no-store'
+                }).catch(function() {});
+            }
+            if (SSA_GOAL_PATTERNS && SSA_GOAL_PATTERNS.length) {
+                document.addEventListener('click', function(ev) {
+                    try {
+                        var a = ev.target && ev.target.closest ? ev.target.closest('a[href]') : null;
+                        if (!a) return;
+                        var href = a.href || a.getAttribute('href') || '';
+                        if (urlHitsGoal(href)) {
+                            sendGoal(href);
+                        }
+                    } catch (e) {}
+                }, true);
+            }
+
+            // =========================
             // EXIT TRACKING
             // =========================
             window.addEventListener('beforeunload', function() {
                 send(buildPayload(), true);
             });
 
+            // =========================
+            // BFCACHE RESTORE (Back/Forward)
+            // bfcache restores the page without re-running this script, so we tell the server
+            // this is a back/forward navigation (no trail append) and refresh the active marker.
+            // =========================
+            window.addEventListener('pageshow', function(ev) {
+                if (ev.persisted) {
+                    isBackForwardNav = true;
+                    var idleMs = ssaLastActiveNow() - ssaLastActiveGet();
+                    if (idleMs > SESSION_TIMEOUT_MS) {
+                        sessionId = ssaRandomSid();
+                        ssaPersistSid(sessionId);
+                    }
+                    ssaLastActiveSet(ssaLastActiveNow());
+                    send(buildPayload(), false);
+                }
+            });
+
+            // =========================
+            // VISIBILITY RETURN — check the 30-min idle timeout
+            // =========================
+            window.addEventListener('visibilitychange', function() {
+                if (!document.hidden) {
+                    var idleMs = ssaLastActiveNow() - ssaLastActiveGet();
+                    if (idleMs > SESSION_TIMEOUT_MS) {
+                        sessionId = ssaRandomSid();
+                        ssaPersistSid(sessionId);
+                        ssaLastActiveSet(ssaLastActiveNow());
+                    }
+                }
+            });
+
         })();
     </script>
-    <script defer src="https://www.googletagmanager.com/gtag/js?id=G-F3X5WEHELL"></script>
-    <script defer src="data:text/javascript;base64,CiAgICB3aW5kb3cuZGF0YUxheWVyID0gd2luZG93LmRhdGFMYXllciB8fCBbXTsKICAgIGZ1bmN0aW9uIGd0YWcoKXtkYXRhTGF5ZXIucHVzaChhcmd1bWVudHMpO30KCiAgICBndGFnKCdqcycsIG5ldyBEYXRlKCkpOwoKICAgIC8vIPCflKUgSEFSRCBGSVggRk9SIElOVkFMSUQgRE9NQUlOIENPT0tJRQogICAgZ3RhZygnY29uZmlnJywgJ0ctRjNYNVdFSEVMTCcsIHsKICAgICAgICBjb29raWVfZG9tYWluOiAnLm1pbGxicmlkZ2Vjb3VydC5jby51aycKICAgIH0pOwogICAg"></script>
-    <style type="text/css">
-        .eic-image .eic-image-caption {
-            bottom: 0;
-            left: 0;
-            right: 0;
-            text-align: left;
-            font-size: 12px;
-            color: rgba(255, 255, 255, 1);
-            background-color: rgba(0, 0, 0, 0.7);
-        }
-    </style>
     <meta name="generator" content="Site Kit by Google 1.182.0" />
     <link rel="icon" href="https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_32,h_32/https://www.millbridgecourt.co.uk/wp-content/uploads/2025/12/cropped-favicon2-32x32.png" sizes="32x32" />
     <link rel="icon" href="https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_192,h_192/https://www.millbridgecourt.co.uk/wp-content/uploads/2025/12/cropped-favicon2-192x192.png" sizes="192x192" />
@@ -1282,6 +1499,16 @@
             </div>
         </a>
     </li>
+    <li id="menu-item-17205" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-17205 menu-item--has-motif">
+        <a itemprop="url" href="https://www.millbridgecourt.co.uk/contact-us/" class="nav-link">
+            <div class="menu-item__wrapper">
+                <div class="icon icon--sm menu-item__motif menu-item__motif--left" aria-hidden="true"><svg fill="none" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><g fill="currentcolor"><path d="m31.2993 17.2975c2.312 0 4.2007 1.8887 4.2007 4.2006 0 2.312-1.8887 4.2007-4.2007 4.2007-2.3119 0-4.2006-1.8887-4.2006-4.2007 0-2.3119 1.8887-4.2006 4.2006-4.2006z"/><path d="m19.1861 7.8219c2.312 0 4.2006 1.88867 4.2006 4.2007 0 2.3119-1.8886 4.2006-4.2006 4.2006s-4.2007-1.8887-4.2007-4.2006c0-2.31203 1.8887-4.2007 4.2007-4.2007z"/><path d="m19.1861 23.7777c2.312 0 4.2006 1.8886 4.2006 4.2006s-1.8886 4.2007-4.2006 4.2007-4.2007-1.8887-4.2007-4.2007 1.8887-4.2006 4.2007-4.2006z"/><path d="m8.70071 17.2975c2.31199 0 4.20069 1.8887 4.20069 4.2006 0 2.312-1.8887 4.2007-4.20069 4.2007s-4.20066-1.8887-4.20066-4.2007c0-2.3119 1.88867-4.2006 4.20066-4.2006z"/></g></svg></div>
+                <div
+                    class="menu-item__label">Book a Viewing</div>
+            <div class="icon icon--sm menu-item__motif menu-item__motif--right" aria-hidden="true"><svg fill="none" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><g fill="currentcolor"><path d="m31.2993 17.2975c2.312 0 4.2007 1.8887 4.2007 4.2006 0 2.312-1.8887 4.2007-4.2007 4.2007-2.3119 0-4.2006-1.8887-4.2006-4.2007 0-2.3119 1.8887-4.2006 4.2006-4.2006z"/><path d="m19.1861 7.8219c2.312 0 4.2006 1.88867 4.2006 4.2007 0 2.3119-1.8886 4.2006-4.2006 4.2006s-4.2007-1.8887-4.2007-4.2006c0-2.31203 1.8887-4.2007 4.2007-4.2007z"/><path d="m19.1861 23.7777c2.312 0 4.2006 1.8886 4.2006 4.2006s-1.8886 4.2007-4.2006 4.2007-4.2007-1.8887-4.2007-4.2007 1.8887-4.2006 4.2007-4.2006z"/><path d="m8.70071 17.2975c2.31199 0 4.20069 1.8887 4.20069 4.2006 0 2.312-1.8887 4.2007-4.20069 4.2007s-4.20066-1.8887-4.20066-4.2007c0-2.3119 1.88867-4.2006 4.20066-4.2006z"/></g></svg></div>
+            </div>
+        </a>
+    </li>
     </ul>
     </div>
     <div id="secondary-menu-items-wrapper" class="menu-items-wrapper">
@@ -1311,8 +1538,7 @@
         <main class="site-main">
             <section class="home__hero js-hero imposter" data-color-scheme="dark">
                 <div class="background frame frame--ratio-unset">
-                    <picture>
-                        <source media="(max-width: 768px)" data-srcset="https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/04/MariellLindHansen-2758-scaled.jpg" /> <img decoding="async" src="https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/04/MariellLindHansen-2758-scaled.jpg" alt="" class="hero-background-image" /> </picture>
+                    <picture> <img decoding="async" src="https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/07/ILIAMillbridgeCourt-9799-scaled.jpg" alt="" class="hero-background-image" /> </picture>
                 </div>
                 <div class="imposter-element hero-content">
                     <div class="container">
@@ -1322,7 +1548,7 @@
                 </div>
             </section>
             <section class="blocks" data-color-scheme="light">
-                <section class="block block--image-text" data-image-side="right" data-image-count="2" data-image-layout="1">
+                <section class="block block--image-text" data-image-side="right" data-image-count="1" data-image-layout="1">
                     <div class="container inner">
                         <div class="images block__images">
                             <a href="/the-house" class="block__link image image--1" data-ratio="3/4">
@@ -1355,12 +1581,12 @@
                 <section class="block block--image-text" data-image-side="left" data-image-count="1" data-image-layout="1">
                     <div class="container inner">
                         <div class="images block__images">
-                            <a href="/weddings" class="block__link image image--1" data-ratio="4/3">
-                                <div class="image image--1" data-ratio="4/3">
-                                    <image-reveal ratio="4/3" crop="center" color="muted-woad" string="parallax" string-parallax="-0.4"> <noscript><img decoding="async" width="2048" height="1365" src="https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_2048,h_1365/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/07/RM-Wedding-Full-873.jpg" class="attachment-full size-full" alt="" loading="lazy" srcset="https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_2048/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/07/RM-Wedding-Full-873.jpg 2048w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_300/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/07/RM-Wedding-Full-873-300x200.jpg 300w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_1024/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/07/RM-Wedding-Full-873-1024x683.jpg 1024w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_768/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/07/RM-Wedding-Full-873-768x512.jpg 768w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_1536/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/07/RM-Wedding-Full-873-1536x1024.jpg 1536w" sizes="auto, (max-width: 2048px) 100vw, 2048px" /></noscript><img
-                                            src='data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%202048%201365%22%3E%3C/svg%3E' decoding="async" width="2048" height="1365" data-src="https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_2048,h_1365/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/07/RM-Wedding-Full-873.jpg"
-                                            class="lazyload attachment-full size-full" alt="" loading="lazy" data-srcset="https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_2048/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/07/RM-Wedding-Full-873.jpg 2048w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_300/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/07/RM-Wedding-Full-873-300x200.jpg 300w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_1024/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/07/RM-Wedding-Full-873-1024x683.jpg 1024w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_768/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/07/RM-Wedding-Full-873-768x512.jpg 768w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_1536/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/07/RM-Wedding-Full-873-1536x1024.jpg 1536w"
-                                            data-sizes="auto, (max-width: 2048px) 100vw, 2048px" /> </image-reveal>
+                            <a href="/weddings" class="block__link image image--1" data-ratio="3/4">
+                                <div class="image image--1" data-ratio="3/4">
+                                    <image-reveal ratio="3/4" crop="center" color="muted-woad" string="parallax" string-parallax="-0.4"> <noscript><img decoding="async" width="1065" height="1600" src="https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_1065,h_1600/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/07/Millbridge-Court-_-6_websize.jpg" class="attachment-full size-full" alt="" loading="lazy" srcset="https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_1065/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/07/Millbridge-Court-_-6_websize.jpg 1065w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_200/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/07/Millbridge-Court-_-6_websize-200x300.jpg 200w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_682/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/07/Millbridge-Court-_-6_websize-682x1024.jpg 682w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_768/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/07/Millbridge-Court-_-6_websize-768x1154.jpg 768w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_1022/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/07/Millbridge-Court-_-6_websize-1022x1536.jpg 1022w" sizes="auto, (max-width: 1065px) 100vw, 1065px" /></noscript><img
+                                            src='data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%201065%201600%22%3E%3C/svg%3E' decoding="async" width="1065" height="1600" data-src="https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_1065,h_1600/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/07/Millbridge-Court-_-6_websize.jpg"
+                                            class="lazyload attachment-full size-full" alt="" loading="lazy" data-srcset="https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_1065/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/07/Millbridge-Court-_-6_websize.jpg 1065w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_200/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/07/Millbridge-Court-_-6_websize-200x300.jpg 200w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_682/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/07/Millbridge-Court-_-6_websize-682x1024.jpg 682w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_768/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/07/Millbridge-Court-_-6_websize-768x1154.jpg 768w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_1022/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/07/Millbridge-Court-_-6_websize-1022x1536.jpg 1022w"
+                                            data-sizes="auto, (max-width: 1065px) 100vw, 1065px" /> </image-reveal>
                                 </div>
                             </a>
                         </div>
@@ -1387,10 +1613,10 @@
                         <div class="images block__images">
                             <a href="/private-takeovers/" class="block__link image image--1" data-ratio="3/4">
                                 <div class="image image--1" data-ratio="3/4">
-                                    <image-reveal ratio="3/4" crop="center" color="lavender" string="parallax" string-parallax="-0.4"> <noscript><img decoding="async" width="1707" height="2560" src="https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_1707,h_2560/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/07/ILIAMillbridgeCourt-9799-scaled.jpg" class="attachment-full size-full" alt="" loading="lazy" srcset="https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_1707/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/07/ILIAMillbridgeCourt-9799-scaled.jpg 1707w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_200/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/07/ILIAMillbridgeCourt-9799-200x300.jpg 200w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_683/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/07/ILIAMillbridgeCourt-9799-683x1024.jpg 683w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_768/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/07/ILIAMillbridgeCourt-9799-768x1151.jpg 768w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_1024/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/07/ILIAMillbridgeCourt-9799-1024x1536.jpg 1024w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_1366/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/07/ILIAMillbridgeCourt-9799-1366x2048.jpg 1366w" sizes="auto, (max-width: 1707px) 100vw, 1707px" /></noscript><img
-                                            src='data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%201707%202560%22%3E%3C/svg%3E' decoding="async" width="1707" height="2560" data-src="https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_1707,h_2560/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/07/ILIAMillbridgeCourt-9799-scaled.jpg"
-                                            class="lazyload attachment-full size-full" alt="" loading="lazy" data-srcset="https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_1707/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/07/ILIAMillbridgeCourt-9799-scaled.jpg 1707w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_200/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/07/ILIAMillbridgeCourt-9799-200x300.jpg 200w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_683/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/07/ILIAMillbridgeCourt-9799-683x1024.jpg 683w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_768/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/07/ILIAMillbridgeCourt-9799-768x1151.jpg 768w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_1024/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/07/ILIAMillbridgeCourt-9799-1024x1536.jpg 1024w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_1366/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/07/ILIAMillbridgeCourt-9799-1366x2048.jpg 1366w"
-                                            data-sizes="auto, (max-width: 1707px) 100vw, 1707px" /> </image-reveal>
+                                    <image-reveal ratio="3/4" crop="center" color="lavender" string="parallax" string-parallax="-0.4"> <noscript><img decoding="async" width="1708" height="2560" src="https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_1708,h_2560/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/07/ILIAMillbridgeCourt-9309-scaled.jpg" class="attachment-full size-full" alt="" loading="lazy" srcset="https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_1708/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/07/ILIAMillbridgeCourt-9309-scaled.jpg 1708w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_200/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/07/ILIAMillbridgeCourt-9309-200x300.jpg 200w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_683/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/07/ILIAMillbridgeCourt-9309-683x1024.jpg 683w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_768/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/07/ILIAMillbridgeCourt-9309-768x1151.jpg 768w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_1025/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/07/ILIAMillbridgeCourt-9309-1025x1536.jpg 1025w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_1366/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/07/ILIAMillbridgeCourt-9309-1366x2048.jpg 1366w" sizes="auto, (max-width: 1708px) 100vw, 1708px" /></noscript><img
+                                            src='data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%201708%202560%22%3E%3C/svg%3E' decoding="async" width="1708" height="2560" data-src="https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_1708,h_2560/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/07/ILIAMillbridgeCourt-9309-scaled.jpg"
+                                            class="lazyload attachment-full size-full" alt="" loading="lazy" data-srcset="https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_1708/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/07/ILIAMillbridgeCourt-9309-scaled.jpg 1708w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_200/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/07/ILIAMillbridgeCourt-9309-200x300.jpg 200w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_683/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/07/ILIAMillbridgeCourt-9309-683x1024.jpg 683w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_768/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/07/ILIAMillbridgeCourt-9309-768x1151.jpg 768w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_1025/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/07/ILIAMillbridgeCourt-9309-1025x1536.jpg 1025w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_1366/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/07/ILIAMillbridgeCourt-9309-1366x2048.jpg 1366w"
+                                            data-sizes="auto, (max-width: 1708px) 100vw, 1708px" /> </image-reveal>
                                 </div>
                             </a>
                         </div>
@@ -1412,23 +1638,15 @@
                         </div>
                     </div>
                 </section>
-                <section class="block block--image-text" data-image-side="left" data-image-count="2" data-image-layout="3">
+                <section class="block block--image-text" data-image-side="left" data-image-count="1" data-image-layout="1">
                     <div class="container inner">
                         <div class="images block__images">
                             <a href="https://www.millbridgecourt.co.uk/bedrooms/" class="block__link image image--1" data-ratio="3/4">
                                 <div class="image image--1" data-ratio="3/4">
-                                    <image-reveal ratio="3/4" crop="center" color="lavender" string="parallax" string-parallax="-0.4"> <noscript><img decoding="async" width="1708" height="2560" src="https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_1708,h_2560/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/04/MariellLindHansen-3393-scaled.jpg" class="attachment-full size-full" alt="" loading="lazy" srcset="https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_1708/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/04/MariellLindHansen-3393-scaled.jpg 1708w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_200/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/04/MariellLindHansen-3393-200x300.jpg 200w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_683/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/04/MariellLindHansen-3393-683x1024.jpg 683w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_768/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/04/MariellLindHansen-3393-768x1151.jpg 768w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_1025/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/04/MariellLindHansen-3393-1025x1536.jpg 1025w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_1366/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/04/MariellLindHansen-3393-1366x2048.jpg 1366w" sizes="auto, (max-width: 1708px) 100vw, 1708px" /></noscript><img
-                                            src='data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%201708%202560%22%3E%3C/svg%3E' decoding="async" width="1708" height="2560" data-src="https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_1708,h_2560/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/04/MariellLindHansen-3393-scaled.jpg"
-                                            class="lazyload attachment-full size-full" alt="" loading="lazy" data-srcset="https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_1708/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/04/MariellLindHansen-3393-scaled.jpg 1708w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_200/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/04/MariellLindHansen-3393-200x300.jpg 200w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_683/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/04/MariellLindHansen-3393-683x1024.jpg 683w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_768/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/04/MariellLindHansen-3393-768x1151.jpg 768w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_1025/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/04/MariellLindHansen-3393-1025x1536.jpg 1025w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_1366/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/04/MariellLindHansen-3393-1366x2048.jpg 1366w"
-                                            data-sizes="auto, (max-width: 1708px) 100vw, 1708px" /> </image-reveal>
-                                </div>
-                            </a>
-                            <a href="https://www.millbridgecourt.co.uk/bedrooms/" class="block__link image image--2" data-ratio="4/3">
-                                <div class="image image--2" data-ratio="4/3">
-                                    <image-reveal ratio="4/3" crop="center" color="lawn-green" string="parallax" string-parallax="-0.2" no-border> <noscript><img decoding="async" width="1707" height="1387" src="https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_1707,h_1387/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/03/MariellLindHansen-3068-scaled-e1774948832627.jpg" class="attachment-full size-full" alt="" loading="lazy" srcset="https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_1707/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/03/MariellLindHansen-3068-scaled-e1774948832627.jpg 1707w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_300/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/03/MariellLindHansen-3068-scaled-e1774948832627-300x244.jpg 300w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_1024/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/03/MariellLindHansen-3068-scaled-e1774948832627-1024x832.jpg 1024w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_768/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/03/MariellLindHansen-3068-scaled-e1774948832627-768x624.jpg 768w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_1536/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/03/MariellLindHansen-3068-scaled-e1774948832627-1536x1248.jpg 1536w" sizes="auto, (max-width: 1707px) 100vw, 1707px" /></noscript><img
-                                            src='data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%201707%201387%22%3E%3C/svg%3E' decoding="async" width="1707" height="1387" data-src="https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_1707,h_1387/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/03/MariellLindHansen-3068-scaled-e1774948832627.jpg"
-                                            class="lazyload attachment-full size-full" alt="" loading="lazy" data-srcset="https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_1707/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/03/MariellLindHansen-3068-scaled-e1774948832627.jpg 1707w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_300/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/03/MariellLindHansen-3068-scaled-e1774948832627-300x244.jpg 300w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_1024/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/03/MariellLindHansen-3068-scaled-e1774948832627-1024x832.jpg 1024w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_768/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/03/MariellLindHansen-3068-scaled-e1774948832627-768x624.jpg 768w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_1536/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/03/MariellLindHansen-3068-scaled-e1774948832627-1536x1248.jpg 1536w"
-                                            data-sizes="auto, (max-width: 1707px) 100vw, 1707px" /> </image-reveal>
+                                    <image-reveal ratio="3/4" crop="bottom" color="lavender" string="parallax" string-parallax="-0.4"> <noscript><img decoding="async" width="2560" height="1708" src="https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_2560,h_1708/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/03/MariellLindHansen-3119-scaled.jpg" class="attachment-full size-full" alt="" loading="lazy" srcset="https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_2560/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/03/MariellLindHansen-3119-scaled.jpg 2560w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_300/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/03/MariellLindHansen-3119-300x200.jpg 300w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_1024/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/03/MariellLindHansen-3119-1024x683.jpg 1024w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_768/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/03/MariellLindHansen-3119-768x512.jpg 768w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_1536/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/03/MariellLindHansen-3119-1536x1025.jpg 1536w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_2048/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/03/MariellLindHansen-3119-2048x1366.jpg 2048w" sizes="auto, (max-width: 2560px) 100vw, 2560px" /></noscript><img
+                                            src='data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%202560%201708%22%3E%3C/svg%3E' decoding="async" width="2560" height="1708" data-src="https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_2560,h_1708/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/03/MariellLindHansen-3119-scaled.jpg"
+                                            class="lazyload attachment-full size-full" alt="" loading="lazy" data-srcset="https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_2560/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/03/MariellLindHansen-3119-scaled.jpg 2560w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_300/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/03/MariellLindHansen-3119-300x200.jpg 300w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_1024/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/03/MariellLindHansen-3119-1024x683.jpg 1024w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_768/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/03/MariellLindHansen-3119-768x512.jpg 768w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_1536/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/03/MariellLindHansen-3119-1536x1025.jpg 1536w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_2048/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/03/MariellLindHansen-3119-2048x1366.jpg 2048w"
+                                            data-sizes="auto, (max-width: 2560px) 100vw, 2560px" /> </image-reveal>
                                 </div>
                             </a>
                         </div>
@@ -1450,23 +1668,15 @@
                         </div>
                     </div>
                 </section>
-                <section class="block block--image-text" data-image-side="right" data-image-count="2" data-image-layout="2">
+                <section class="block block--image-text" data-image-side="right" data-image-count="1" data-image-layout="1">
                     <div class="container inner">
                         <div class="images block__images">
                             <a href="https://www.millbridgecourt.co.uk/eat-drink/" class="block__link image image--1" data-ratio="3/4">
                                 <div class="image image--1" data-ratio="3/4">
-                                    <image-reveal ratio="3/4" crop="center" color="lavender" string="parallax" string-parallax="-0.4"> <noscript><img decoding="async" width="1067" height="1424" src="https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_1067,h_1424/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/03/Holly-Luc-1082_websize-e1774956159903.jpg" class="attachment-full size-full" alt="" loading="lazy" srcset="https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_1067/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/03/Holly-Luc-1082_websize-e1774956159903.jpg 1067w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_225/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/03/Holly-Luc-1082_websize-e1774956159903-225x300.jpg 225w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_767/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/03/Holly-Luc-1082_websize-e1774956159903-767x1024.jpg 767w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_768/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/03/Holly-Luc-1082_websize-e1774956159903-768x1025.jpg 768w" sizes="auto, (max-width: 1067px) 100vw, 1067px" /></noscript><img
-                                            src='data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%201067%201424%22%3E%3C/svg%3E' decoding="async" width="1067" height="1424" data-src="https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_1067,h_1424/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/03/Holly-Luc-1082_websize-e1774956159903.jpg"
-                                            class="lazyload attachment-full size-full" alt="" loading="lazy" data-srcset="https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_1067/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/03/Holly-Luc-1082_websize-e1774956159903.jpg 1067w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_225/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/03/Holly-Luc-1082_websize-e1774956159903-225x300.jpg 225w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_767/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/03/Holly-Luc-1082_websize-e1774956159903-767x1024.jpg 767w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_768/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/03/Holly-Luc-1082_websize-e1774956159903-768x1025.jpg 768w"
-                                            data-sizes="auto, (max-width: 1067px) 100vw, 1067px" /> </image-reveal>
-                                </div>
-                            </a>
-                            <a href="https://www.millbridgecourt.co.uk/eat-drink/" class="block__link image image--2" data-ratio="4/3">
-                                <div class="image image--2" data-ratio="4/3">
-                                    <image-reveal ratio="4/3" crop="center" color="lawn-green" string="parallax" string-parallax="-0.2"> <noscript><img decoding="async" width="1620" height="1080" src="https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_1620,h_1080/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/03/Corporate-brochure-Credit-Milly-Fletcher-176.jpg" class="attachment-full size-full" alt="" loading="lazy" srcset="https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_1620/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/03/Corporate-brochure-Credit-Milly-Fletcher-176.jpg 1620w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_300/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/03/Corporate-brochure-Credit-Milly-Fletcher-176-300x200.jpg 300w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_1024/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/03/Corporate-brochure-Credit-Milly-Fletcher-176-1024x683.jpg 1024w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_768/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/03/Corporate-brochure-Credit-Milly-Fletcher-176-768x512.jpg 768w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_1536/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/03/Corporate-brochure-Credit-Milly-Fletcher-176-1536x1024.jpg 1536w" sizes="auto, (max-width: 1620px) 100vw, 1620px" /></noscript><img
-                                            src='data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%201620%201080%22%3E%3C/svg%3E' decoding="async" width="1620" height="1080" data-src="https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_1620,h_1080/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/03/Corporate-brochure-Credit-Milly-Fletcher-176.jpg"
-                                            class="lazyload attachment-full size-full" alt="" loading="lazy" data-srcset="https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_1620/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/03/Corporate-brochure-Credit-Milly-Fletcher-176.jpg 1620w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_300/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/03/Corporate-brochure-Credit-Milly-Fletcher-176-300x200.jpg 300w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_1024/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/03/Corporate-brochure-Credit-Milly-Fletcher-176-1024x683.jpg 1024w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_768/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/03/Corporate-brochure-Credit-Milly-Fletcher-176-768x512.jpg 768w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_1536/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/03/Corporate-brochure-Credit-Milly-Fletcher-176-1536x1024.jpg 1536w"
-                                            data-sizes="auto, (max-width: 1620px) 100vw, 1620px" /> </image-reveal>
+                                    <image-reveal ratio="3/4" crop="center" color="lavender" string="parallax" string-parallax="-0.4"> <noscript><img decoding="async" width="1707" height="2560" src="https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_1707,h_2560/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/07/darcy-josh-millbridge-court-wedding-613-scaled.jpg" class="attachment-full size-full" alt="" loading="lazy" srcset="https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_1707/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/07/darcy-josh-millbridge-court-wedding-613-scaled.jpg 1707w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_200/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/07/darcy-josh-millbridge-court-wedding-613-200x300.jpg 200w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_683/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/07/darcy-josh-millbridge-court-wedding-613-683x1024.jpg 683w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_768/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/07/darcy-josh-millbridge-court-wedding-613-768x1152.jpg 768w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_1024/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/07/darcy-josh-millbridge-court-wedding-613-1024x1536.jpg 1024w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_1365/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/07/darcy-josh-millbridge-court-wedding-613-1365x2048.jpg 1365w" sizes="auto, (max-width: 1707px) 100vw, 1707px" /></noscript><img
+                                            src='data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%201707%202560%22%3E%3C/svg%3E' decoding="async" width="1707" height="2560" data-src="https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_1707,h_2560/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/07/darcy-josh-millbridge-court-wedding-613-scaled.jpg"
+                                            class="lazyload attachment-full size-full" alt="" loading="lazy" data-srcset="https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_1707/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/07/darcy-josh-millbridge-court-wedding-613-scaled.jpg 1707w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_200/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/07/darcy-josh-millbridge-court-wedding-613-200x300.jpg 200w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_683/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/07/darcy-josh-millbridge-court-wedding-613-683x1024.jpg 683w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_768/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/07/darcy-josh-millbridge-court-wedding-613-768x1152.jpg 768w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_1024/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/07/darcy-josh-millbridge-court-wedding-613-1024x1536.jpg 1024w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_1365/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/07/darcy-josh-millbridge-court-wedding-613-1365x2048.jpg 1365w"
+                                            data-sizes="auto, (max-width: 1707px) 100vw, 1707px" /> </image-reveal>
                                 </div>
                             </a>
                         </div>
@@ -1491,12 +1701,12 @@
                 <section class="block block--image-text" data-image-side="left" data-image-count="1" data-image-layout="1">
                     <div class="container inner">
                         <div class="images block__images">
-                            <a href="/gallery" class="block__link image image--1" data-ratio="4/3">
-                                <div class="image image--1" data-ratio="4/3">
-                                    <image-reveal ratio="4/3" crop="center" color="muted-woad" string="parallax" string-parallax="-0.4"> <noscript><img decoding="async" width="2560" height="1708" src="https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_2560,h_1708/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/03/MariellLindHansen-3264-scaled.jpg" class="attachment-full size-full" alt="" loading="lazy" srcset="https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_2560/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/03/MariellLindHansen-3264-scaled.jpg 2560w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_300/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/03/MariellLindHansen-3264-300x200.jpg 300w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_1024/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/03/MariellLindHansen-3264-1024x683.jpg 1024w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_768/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/03/MariellLindHansen-3264-768x512.jpg 768w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_1536/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/03/MariellLindHansen-3264-1536x1025.jpg 1536w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_2048/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/03/MariellLindHansen-3264-2048x1366.jpg 2048w" sizes="auto, (max-width: 2560px) 100vw, 2560px" /></noscript><img
-                                            src='data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%202560%201708%22%3E%3C/svg%3E' decoding="async" width="2560" height="1708" data-src="https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_2560,h_1708/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/03/MariellLindHansen-3264-scaled.jpg"
-                                            class="lazyload attachment-full size-full" alt="" loading="lazy" data-srcset="https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_2560/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/03/MariellLindHansen-3264-scaled.jpg 2560w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_300/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/03/MariellLindHansen-3264-300x200.jpg 300w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_1024/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/03/MariellLindHansen-3264-1024x683.jpg 1024w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_768/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/03/MariellLindHansen-3264-768x512.jpg 768w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_1536/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/03/MariellLindHansen-3264-1536x1025.jpg 1536w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_2048/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/03/MariellLindHansen-3264-2048x1366.jpg 2048w"
-                                            data-sizes="auto, (max-width: 2560px) 100vw, 2560px" /> </image-reveal>
+                            <a href="/gallery" class="block__link image image--1" data-ratio="3/4">
+                                <div class="image image--1" data-ratio="3/4">
+                                    <image-reveal ratio="3/4" crop="center" color="muted-woad" string="parallax" string-parallax="-0.4"> <noscript><img decoding="async" width="1067" height="1600" src="https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_1067,h_1600/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/07/MillbridgeRenovation0106.jpg" class="attachment-full size-full" alt="" loading="lazy" srcset="https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_1067/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/07/MillbridgeRenovation0106.jpg 1067w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_200/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/07/MillbridgeRenovation0106-200x300.jpg 200w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_683/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/07/MillbridgeRenovation0106-683x1024.jpg 683w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_768/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/07/MillbridgeRenovation0106-768x1152.jpg 768w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_1024/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/07/MillbridgeRenovation0106-1024x1536.jpg 1024w" sizes="auto, (max-width: 1067px) 100vw, 1067px" /></noscript><img
+                                            src='data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%201067%201600%22%3E%3C/svg%3E' decoding="async" width="1067" height="1600" data-src="https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_1067,h_1600/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/07/MillbridgeRenovation0106.jpg"
+                                            class="lazyload attachment-full size-full" alt="" loading="lazy" data-srcset="https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_1067/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/07/MillbridgeRenovation0106.jpg 1067w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_200/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/07/MillbridgeRenovation0106-200x300.jpg 200w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_683/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/07/MillbridgeRenovation0106-683x1024.jpg 683w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_768/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/07/MillbridgeRenovation0106-768x1152.jpg 768w, https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_1024/https://www.millbridgecourt.co.uk/wp-content/uploads/2026/07/MillbridgeRenovation0106-1024x1536.jpg 1024w"
+                                            data-sizes="auto, (max-width: 1067px) 100vw, 1067px" /> </image-reveal>
                                 </div>
                             </a>
                         </div>
@@ -1621,7 +1831,8 @@
             <div class="content stack stack--space-md">
                 <h3 class="heading">Want to know more?</h3>
                 <div class=" body prose">
-                    <p>Send us a note or come visit, we would love to show you around.</p>
+                    <p>Send us a note or come visit,
+                        <br /> we would love to show you around.</p>
                 </div>
                 <div class="actions"> <a href="/contact" target="_self" class="btn btn--ghost btn--ghost-underline" aria-label="Contact">Contact</a></div>
             </div>
@@ -1708,4 +1919,4 @@
     <a href="#page" id="back-to-top" class="top no-external-link-indicator" data-version="teap91" aria-label="Back to top of page" tabindex="0"> <span class="sr-only">Back to top</span> <span aria-hidden="true">&uarr;</span> </a></body>
 
 </html>
-<!-- Cached by WP-Optimize (gzip) - https://teamupdraft.com/wp-optimize/ - Last modified: 24 July 2026 10:20 am (Europe/London UTC:1) -->
+<!-- Cached by WP-Optimize (gzip) - https://teamupdraft.com/wp-optimize/ - Last modified: 2 August 2026 1:13 pm (Europe/London UTC:1) -->
