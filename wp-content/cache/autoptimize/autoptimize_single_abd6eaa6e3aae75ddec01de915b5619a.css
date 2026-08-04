@@ -5,6 +5,6 @@
 /* === full-image subpage heroes === */
 .hero--full{height:auto !important;min-height:0 !important}
 .hero--full .frame{position:relative !important;height:auto !important;min-height:0 !important;top:auto;left:auto}
-.hero--full .hero-background-image{position:static !important;width:100% !important;height:auto !important;max-height:92vh;object-fit:contain !important;display:block}
+.hero--full .hero-background-image{position:static !important;width:100% !important;height:auto !important;max-height:92vh;object-fit:cover !important;display:block}
 .hero--full picture{position:static !important;width:100%;height:auto !important;display:block}
 .hero--full .hero-content{min-height:0 !important;position:absolute !important;top:0;left:0;right:0;bottom:0}
