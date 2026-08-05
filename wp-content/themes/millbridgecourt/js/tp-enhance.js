@@ -282,49 +282,114 @@ window.addEventListener('wheel', function (e) {
         }
     }
 
-    /* --- soft chime on first interaction + mute toggle --- */
+    /* --- continuous ambient tune (generative, WebAudio; mute toggle persists) --- */
     (function () {
         var muted = false;
         try { muted = localStorage.getItem('tpSound') === 'off'; } catch (e) {}
         var btn = document.createElement('button');
         btn.className = 'tp-sound';
-        btn.title = 'Sound';
+        btn.title = 'Music on/off';
         btn.innerHTML = '&#9834;';
         btn.setAttribute('data-muted', muted ? '1' : '0');
         document.body.appendChild(btn);
-        function chime() {
+
+        var ctx = null, master = null, timers = [];
+        var CHORDS = [
+            [261.63, 329.63, 392.00, 493.88],  /* Cmaj7 */
+            [220.00, 261.63, 329.63, 392.00],  /* Am7  */
+            [174.61, 220.00, 261.63, 329.63],  /* Fmaj7 */
+            [196.00, 246.94, 293.66, 329.63]   /* G6   */
+        ];
+        var BELLS = [523.25, 587.33, 659.25, 783.99, 880.00, 1046.5];
+        var chordIx = 0;
+
+        function ensureCtx() {
+            if (ctx) return true;
             try {
-                var ctx = new (window.AudioContext || window.webkitAudioContext)();
-                [659.25, 987.77].forEach(function (freq, i) {
+                ctx = new (window.AudioContext || window.webkitAudioContext)();
+                master = ctx.createGain();
+                master.gain.value = 0.0;
+                var lp = ctx.createBiquadFilter();
+                lp.type = 'lowpass'; lp.frequency.value = 1500;
+                master.connect(lp).connect(ctx.destination);
+                return true;
+            } catch (e) { return false; }
+        }
+        function pad(freqs) {
+            if (!ctx) return;
+            var t = ctx.currentTime;
+            freqs.forEach(function (fq, i) {
+                [0, 1.7].forEach(function (detune) {
                     var o = ctx.createOscillator(), g = ctx.createGain();
-                    o.type = 'sine'; o.frequency.value = freq;
-                    g.gain.setValueAtTime(0, ctx.currentTime + i * 0.22);
-                    g.gain.linearRampToValueAtTime(0.035, ctx.currentTime + i * 0.22 + 0.03);
-                    g.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + i * 0.22 + 1.4);
-                    o.connect(g).connect(ctx.destination);
-                    o.start(ctx.currentTime + i * 0.22); o.stop(ctx.currentTime + i * 0.22 + 1.5);
+                    o.type = 'triangle';
+                    o.frequency.value = fq;
+                    o.detune.value = detune + (i - 1.5);
+                    g.gain.setValueAtTime(0, t);
+                    g.gain.linearRampToValueAtTime(0.028 / freqs.length, t + 3.2);
+                    g.gain.setValueAtTime(0.028 / freqs.length, t + 5.4);
+                    g.gain.linearRampToValueAtTime(0, t + 9);
+                    o.connect(g).connect(master);
+                    o.start(t); o.stop(t + 9.2);
                 });
-                setTimeout(function () { ctx.close(); }, 2200);
-            } catch (e) {}
+            });
         }
-        var played = false;
-        try { played = sessionStorage.getItem('tpChimed') === '1'; } catch (e) {}
-        function firstTouch() {
-            document.removeEventListener('pointerdown', firstTouch);
-            if (muted || played) return;
-            try { sessionStorage.setItem('tpChimed', '1'); } catch (e) {}
-            chime();
+        function bell() {
+            if (!ctx) return;
+            var t = ctx.currentTime;
+            var o = ctx.createOscillator(), g = ctx.createGain();
+            o.type = 'sine';
+            o.frequency.value = BELLS[(Math.random() * BELLS.length) | 0];
+            g.gain.setValueAtTime(0, t);
+            g.gain.linearRampToValueAtTime(0.014, t + 0.02);
+            g.gain.exponentialRampToValueAtTime(0.0001, t + 2.6);
+            o.connect(g).connect(master);
+            o.start(t); o.stop(t + 2.8);
         }
-        document.addEventListener('pointerdown', firstTouch);
+        function startLoop() {
+            stopLoop();
+            pad(CHORDS[chordIx]);
+            timers.push(setInterval(function () {
+                chordIx = (chordIx + 1) % CHORDS.length;
+                pad(CHORDS[chordIx]);
+            }, 8000));
+            timers.push(setInterval(function () { if (Math.random() < 0.75) bell(); }, 4600));
+        }
+        function stopLoop() { timers.forEach(clearInterval); timers = []; }
+        function fadeTo(v, secs) {
+            if (!ctx) return;
+            master.gain.cancelScheduledValues(ctx.currentTime);
+            master.gain.setValueAtTime(master.gain.value, ctx.currentTime);
+            master.gain.linearRampToValueAtTime(v, ctx.currentTime + secs);
+        }
+        function play() {
+            if (!ensureCtx()) return;
+            if (ctx.state === 'suspended') ctx.resume();
+            startLoop();
+            fadeTo(1, 2.5);
+        }
+        function hush() { fadeTo(0, 1); stopLoop(); }
+
+        function boot() {
+            document.removeEventListener('pointerdown', boot);
+            document.removeEventListener('keydown', boot);
+            if (!muted) play();
+        }
+        document.addEventListener('pointerdown', boot);
+        document.addEventListener('keydown', boot);
+
+        document.addEventListener('visibilitychange', function () {
+            if (!ctx || muted) return;
+            if (document.hidden) { ctx.suspend(); } else { ctx.resume(); }
+        });
+
         btn.addEventListener('click', function (e) {
             e.stopPropagation();
             muted = !muted;
             btn.setAttribute('data-muted', muted ? '1' : '0');
             try { localStorage.setItem('tpSound', muted ? 'off' : 'on'); } catch (err) {}
-            if (!muted) chime();
+            if (muted) hush(); else play();
         });
     })();
-
     /* --- gold ink trail (desktop, sleeps when faded) --- */
     if (fine && !reduced) {
         var cv = document.createElement('canvas');
