@@ -162,9 +162,18 @@ html.tp-anim .tp-reveal{opacity:1;transform:none;transition:none}
 .tp-sound{width:2.2rem;height:2.2rem;left:.9rem;bottom:.9rem;font-size:.85rem}
 .tp-marquee__track span{font-size:.85rem;letter-spacing:.14em}
 .tp-marquee{padding:1rem 0}
+/* mobile typography and rhythm */
+.blocks .block--image-text{padding-block:.9rem}
+.blocks .container.inner{row-gap:1.3rem;column-gap:1.3rem}
+.block__content .center{gap:.85rem}
+.block__body p,.prose p{font-size:1.02rem;line-height:1.62}
+.actions .link{font-size:.82rem;letter-spacing:.22em}
+.heading__wrapper{gap:.5rem}
+.heading__motif{width:1.15rem;height:1.15rem}
+.tp-marquee{padding:.85rem 0}
 /* headings: never break mid-word, fit one line where possible */
 .block__heading,.heading__wrapper .heading,.home__hero .hero-content .heading,h1.heading,h2.heading,h3.heading{word-break:normal;overflow-wrap:normal;hyphens:none}
-.block__heading{font-size:1.25rem;letter-spacing:.11em}
+.block__heading{font-size:1.5rem;letter-spacing:.13em}
 .hero--full .hero-content .heading{font-size:clamp(1.5rem,7vw,2.1rem);letter-spacing:.08em}
 /* keep everything inside the screen */
 html,body{overflow-x:clip}
@@ -190,7 +199,7 @@ html,body{overflow-x:clip}
 .tp-walk__caption{position:absolute;z-index:4;left:0;right:0;top:50%;transform:translateY(-40%);margin:0;font-family:"ABC Arizona Flare",serif;font-size:clamp(2rem,5vw,3.6rem);color:#F5E1CB;opacity:0;pointer-events:none;text-shadow:0 4px 30px rgba(0,0,0,.45)}
 .tp-walk__caption-accent{color:#FFC371}
 @media (max-width:760px){
-.tp-walk{height:240vh}
+.tp-walk{height:170vh}
 .page-hero.tp-walk{min-height:0}
 }
 @media (prefers-reduced-motion:reduce){
