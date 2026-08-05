@@ -46,8 +46,8 @@
 @keyframes phFadeDown{from{opacity:0;transform:translateY(-16px)}to{opacity:1;transform:translateY(0)}}
 
 /* === TP wow pack: marquee band === */
-.tp-marquee{background:#08361A;color:#F5E1CB;overflow:hidden;padding:1.35rem 0;border-block:1px solid rgba(255,195,113,.25)}
-.tp-marquee__track{display:flex;width:max-content;animation:tpMarquee 38s linear infinite}
+.tp-marquee{background:#08361A;color:#F5E1CB;overflow:hidden;padding:1.35rem 0;border-block:1px solid rgba(255,195,113,.25);contain:content}
+.tp-marquee__track{display:flex;width:max-content;animation:tpMarquee 38s linear infinite;will-change:transform}
 .tp-marquee:hover .tp-marquee__track{animation-play-state:paused}
 .tp-marquee__track span{font-family:"ABC Arizona Flare",serif;font-size:1.15rem;letter-spacing:.18em;white-space:nowrap;padding-right:2.5rem}
 .tp-marquee__track i{color:#FFC371;font-style:normal;margin:0 1.2rem}
@@ -84,13 +84,13 @@ html.tp-anim .tp-reveal{opacity:1;transform:none;transition:none}
 .tp-splash__line{width:0;height:1px;background:rgba(255,195,113,.6);animation:phRule .7s ease .7s forwards}
 .tp-splash--done{transform:translateY(-101%)}
 .page-hero__bg{will-change:transform;transition:transform .6s cubic-bezier(.22,1,.36,1)}
-.tp-strip{background:#D9D9D9;padding:4.5rem 0 5rem;overflow:hidden}
+.tp-strip{background:#D9D9D9;padding:4.5rem 0 5rem;overflow:hidden;contain:content}
 .tp-strip__head{text-align:center;margin-bottom:2.6rem}
 .tp-strip__eyebrow{font-size:.72rem;letter-spacing:.4em;text-indent:.4em;color:#2E6343}
 .tp-strip__title{font-family:"ABC Arizona Flare",serif;font-size:clamp(1.8rem,3.4vw,2.8rem);color:#08391B;margin-top:.6rem}
-.tp-strip__track{display:flex;gap:1.2rem;width:max-content;animation:tpMarquee 55s linear infinite}
+.tp-strip__track{display:flex;gap:1.2rem;width:max-content;animation:tpMarquee 55s linear infinite;will-change:transform;transform:translateZ(0)}
 .tp-strip:hover .tp-strip__track{animation-play-state:paused}
-.tp-strip__track img{height:17rem;width:auto;display:block;transition:transform .6s cubic-bezier(.22,1,.36,1),filter .6s ease}
+.tp-strip__track img{height:17rem;width:auto;display:block;backface-visibility:hidden;transition:transform .6s cubic-bezier(.22,1,.36,1)}
 .tp-strip__track img:hover{transform:scale(1.045)}
 @media (max-width:640px){.tp-strip__track img{height:11rem}}
 .tp-cursor-dot,.tp-cursor-ring{position:fixed;top:0;left:0;pointer-events:none;z-index:99998;border-radius:50%;transform:translate3d(-100px,-100px,0)}

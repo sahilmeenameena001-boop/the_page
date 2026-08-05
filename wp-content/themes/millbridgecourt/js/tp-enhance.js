@@ -40,6 +40,16 @@
     }, 4000);
 })();
 
+/* === native scroll restore === */
+/* The theme intercepts wheel events (non-passive) and replays scrolling through
+   an easing engine, which feels delayed and stutters on modest hardware.
+   Stopping the event in the capture phase before it reaches the theme's listener
+   restores the browser's native, buttery scrolling. The theme still tracks
+   position via regular scroll events, so parallax and header states keep working. */
+window.addEventListener('wheel', function (e) {
+    e.stopImmediatePropagation();
+}, { capture: true, passive: true });
+
 /* === crazy pack === */
 (function () {
     'use strict';
@@ -87,6 +97,7 @@
     function loop() {
         rx += (mx - rx) * 0.16; ry += (my - ry) * 0.16;
         ring.style.transform = 'translate3d(' + rx + 'px,' + ry + 'px,0)';
+        if (Math.abs(mx - rx) < 0.2 && Math.abs(my - ry) < 0.2) { live = false; return; }
         requestAnimationFrame(loop);
     }
     document.addEventListener('pointerover', function (e) {
