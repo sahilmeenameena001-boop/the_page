@@ -99,3 +99,6 @@ html.tp-anim .tp-reveal{opacity:1;transform:none;transition:none}
 .tp-cursor-ring.tp-cursor--big{width:58px;height:58px;margin:-29px 0 0 -29px;border-color:#FFC371}
 @media (pointer:coarse){.tp-cursor-dot,.tp-cursor-ring{display:none}}
 @media (prefers-reduced-motion:reduce){.tp-splash{display:none}.tp-strip__track{animation:none}.tp-cursor-dot,.tp-cursor-ring{display:none}}
+/* === footer stacking fix: page content must sit above the fixed reveal footer === */
+.site-content{position:relative;z-index:2;margin-bottom:calc(var(--footer-height) - var(--space-sm))}
+.site-content:after{content:none !important}
