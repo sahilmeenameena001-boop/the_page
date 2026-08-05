@@ -69,11 +69,11 @@ window.addEventListener('wheel', function (e) {
 
     var fine = window.matchMedia && window.matchMedia('(pointer: fine)').matches;
     var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (!fine || reduced) return;
 
-    /* walk into the hotel: scroll dollies through the entrance doors into the lobby */
+    /* walk into the hotel: scroll dollies through the entrance doors into the lobby.
+       Runs on touch devices too - it is scroll-driven, not pointer-driven. */
     var walk = document.querySelector('.tp-walk');
-    if (walk) {
+    if (walk && !reduced) {
         var entImg = walk.querySelector('.tp-walk__scene--entrance img');
         var entScene = walk.querySelector('.tp-walk__scene--entrance');
         var lobImg = walk.querySelector('.tp-walk__scene--lobby img');
@@ -128,6 +128,8 @@ window.addEventListener('wheel', function (e) {
         walk.addEventListener('pointerleave', function () { hx = 0; hy = 0; queue(); });
         queue();
     }
+
+    if (!fine || reduced) return;
 
     /* cursor glow: gold dot + trailing ring */
     var dot = document.createElement('div'); dot.className = 'tp-cursor-dot';
