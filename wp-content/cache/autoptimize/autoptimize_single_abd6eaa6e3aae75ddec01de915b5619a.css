@@ -102,3 +102,38 @@ html.tp-anim .tp-reveal{opacity:1;transform:none;transition:none}
 /* === footer stacking fix: page content must sit above the fixed reveal footer === */
 .site-content{position:relative;z-index:2;margin-bottom:calc(var(--footer-height) - var(--space-sm));background-color:var(--color-bg)}
 .site-content:after{content:none !important}
+/* === TP everything pack === */
+/* page-turn transition */
+.tp-turn{position:fixed;inset:0;z-index:100000;background:#F5E1CB;transform:translateX(-103%);pointer-events:none}
+.tp-turn:after{content:"";position:absolute;top:0;bottom:0;right:-3vw;width:3vw;background:linear-gradient(90deg,rgba(8,57,27,.28),transparent)}
+.tp-turn--in{transition:transform .46s cubic-bezier(.76,0,.24,1);transform:translateX(0)}
+.tp-turn--cover{transform:translateX(0)}
+.tp-turn--out{transition:transform .6s cubic-bezier(.76,0,.24,1) .05s;transform:translateX(103%)}
+/* typesetter headline */
+.ph-scramble .ph-line{overflow:visible}
+.ph-scramble .ph-word{transform:none;animation:none}
+.ph-letter{display:inline-block;opacity:0;transform:translate(var(--dx,0),var(--dy,0)) rotate(var(--rot,0));animation:tpSettle 1s cubic-bezier(.22,1,.36,1) var(--del,0s) forwards}
+@keyframes tpSettle{60%{opacity:1}100%{opacity:1;transform:translate(0,0) rotate(0)}}
+/* magnetic buttons */
+.tp-magnet{transition:transform .35s cubic-bezier(.22,1,.36,1)}
+/* film reel drag */
+.tp-strip__track{cursor:grab}
+.tp-strip__track.tp-dragging{cursor:grabbing}
+.tp-strip__track.tp-js{animation:none}
+/* concierge card */
+.tp-concierge{position:fixed;right:1.4rem;bottom:1.4rem;z-index:99996;max-width:20rem;background:#F5E1CB;color:#08391B;border:1px solid rgba(255,195,113,.9);box-shadow:0 12px 40px rgba(8,54,26,.25);padding:1.1rem 1.3rem 1.2rem;opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s cubic-bezier(.22,1,.36,1)}
+.tp-concierge.tp-on{opacity:1;transform:translateY(0)}
+.tp-concierge__label{font-size:.62rem;letter-spacing:.32em;text-indent:.32em;color:#2E6343;margin:0 0 .5rem}
+.tp-concierge__msg{font-family:"ABC Arizona Flare",serif;font-size:1.02rem;line-height:1.5;margin:0;min-height:3em}
+.tp-concierge__msg:after{content:"";display:inline-block;width:1px;height:1em;background:#2E6343;margin-left:2px;vertical-align:-2px;animation:tpBlink 1s steps(1) infinite}
+.tp-concierge.tp-done .tp-concierge__msg:after{display:none}
+@keyframes tpBlink{50%{opacity:0}}
+.tp-concierge__close{position:absolute;top:.35rem;right:.55rem;background:none;border:0;color:#2E6343;font-size:1rem;cursor:pointer;padding:.2rem}
+/* sound toggle */
+.tp-sound{position:fixed;left:1.4rem;bottom:1.4rem;z-index:99996;width:2.6rem;height:2.6rem;border-radius:50%;border:1px solid rgba(255,195,113,.8);background:rgba(8,54,26,.88);color:#F5E1CB;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform .3s ease,opacity .3s}
+.tp-sound:hover{transform:scale(1.12)}
+.tp-sound[data-muted="1"]{opacity:.45}
+/* ink trail canvas */
+.tp-ink{position:fixed;inset:0;z-index:99995;pointer-events:none}
+@media (pointer:coarse){.tp-sound{left:1rem;bottom:1rem}.tp-ink{display:none}}
+@media (prefers-reduced-motion:reduce){.tp-turn,.tp-ink,.tp-concierge{display:none}.ph-letter{animation:none;opacity:1;transform:none}}

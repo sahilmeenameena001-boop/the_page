@@ -71,17 +71,37 @@ window.addEventListener('wheel', function (e) {
     var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (!fine || reduced) return;
 
-    /* hero mouse parallax (GPU transform on the bg wrapper only) */
+    /* hero cinematic engine: mouse parallax + scroll-through-the-doors zoom */
     var hero = document.querySelector('.page-hero');
     var heroBg = document.querySelector('.page-hero__bg');
+    var heroVeil = document.querySelector('.page-hero__veil');
+    var heroContent = document.querySelector('.page-hero__content');
     if (hero && heroBg) {
-        var hx = 0, hy = 0, queued = false;
+        var hx = 0, hy = 0, hs = 1, queued = false;
+        function heroFrame() {
+            heroBg.style.transform = 'translate3d(' + (-hx) + 'px,' + (-hy) + 'px,0) scale(' + hs + ')';
+            queued = false;
+        }
+        function queue() { if (!queued) { queued = true; requestAnimationFrame(heroFrame); } }
         hero.addEventListener('pointermove', function (e) {
             hx = (e.clientX / window.innerWidth - 0.5) * 26;
             hy = (e.clientY / window.innerHeight - 0.5) * 16;
-            if (!queued) { queued = true; requestAnimationFrame(function () { heroBg.style.transform = 'translate3d(' + (-hx) + 'px,' + (-hy) + 'px,0)'; queued = false; }); }
+            queue();
         });
-        hero.addEventListener('pointerleave', function () { heroBg.style.transform = 'translate3d(0,0,0)'; });
+        hero.addEventListener('pointerleave', function () { hx = 0; hy = 0; queue(); });
+        var heroH = 0;
+        function measure() { heroH = hero.getBoundingClientRect().height || window.innerHeight; }
+        measure(); window.addEventListener('resize', measure);
+        window.addEventListener('scroll', function () {
+            var p = Math.min(1, Math.max(0, window.scrollY / (heroH * 0.85)));
+            hs = 1 + p * 0.3;
+            if (heroVeil) heroVeil.style.backgroundColor = 'rgba(8,54,26,' + (p * 0.6).toFixed(3) + ')';
+            if (heroContent) {
+                heroContent.style.opacity = Math.max(0, 1 - p * 1.2);
+                heroContent.style.transform = 'translateY(' + (-p * 46) + 'px)';
+            }
+            queue();
+        }, { passive: true });
     }
 
     /* cursor glow: gold dot + trailing ring */
@@ -106,4 +126,237 @@ window.addEventListener('wheel', function (e) {
     document.addEventListener('pointerout', function (e) {
         if (e.target.closest && e.target.closest('a,button,[role="button"]')) ring.classList.remove('tp-cursor--big');
     }, { passive: true });
+})();
+/* === everything pack === */
+(function () {
+    'use strict';
+    var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var fine = window.matchMedia && window.matchMedia('(pointer: fine)').matches;
+    var onHome = /(?:^|\/)(index\.html)?$/.test(location.pathname);
+
+    /* --- time-aware hero: daytime shows the daylight entrance, evening the dusk shot --- */
+    var heroImg = document.querySelector('.page-hero__bg img');
+    if (heroImg) {
+        var h = new Date().getHours();
+        if (h >= 6 && h < 17) heroImg.src = 'images/home/hero-entrance.jpg';
+    }
+
+    /* --- typesetter headline: letters scatter in from the tray --- */
+    var title = document.querySelector('.ph-title');
+    if (title && !reduced) {
+        title.classList.add('ph-scramble');
+        var li = 0;
+        title.querySelectorAll('.ph-word').forEach(function (word) {
+            var text = word.textContent;
+            word.textContent = '';
+            for (var i = 0; i < text.length; i++) {
+                var s = document.createElement('span');
+                s.className = 'ph-letter';
+                s.textContent = text[i];
+                s.style.setProperty('--dx', ((Math.sin(li * 7.3) * 46) | 0) + 'px');
+                s.style.setProperty('--dy', ((Math.cos(li * 5.1) * 34 - 14) | 0) + 'px');
+                s.style.setProperty('--rot', ((Math.sin(li * 3.7) * 14) | 0) + 'deg');
+                s.style.setProperty('--del', (0.45 + li * 0.045).toFixed(2) + 's');
+                word.appendChild(s);
+                li++;
+            }
+        });
+    }
+
+    /* --- page-turn navigation --- */
+    if (!reduced) {
+        var turn = document.createElement('div');
+        turn.className = 'tp-turn';
+        document.body.appendChild(turn);
+        var turning = false;
+        try {
+            if (sessionStorage.getItem('tpTurning') === '1') {
+                sessionStorage.removeItem('tpTurning');
+                turn.classList.add('tp-turn--cover');
+                requestAnimationFrame(function () { requestAnimationFrame(function () {
+                    turn.classList.add('tp-turn--out');
+                    setTimeout(function () { turn.classList.remove('tp-turn--cover', 'tp-turn--out'); }, 800);
+                }); });
+            }
+        } catch (e) {}
+        document.addEventListener('click', function (e) {
+            if (turning || e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+            var a = e.target.closest && e.target.closest('a[href]');
+            if (!a || a.target === '_blank' || a.hasAttribute('download')) return;
+            var href = a.getAttribute('href');
+            if (!href || href.charAt(0) === '#' || /^(https?:|mailto:|tel:)/.test(href) && a.host !== location.host) return;
+            if (/^(mailto:|tel:)/.test(href)) return;
+            e.preventDefault();
+            turning = true;
+            try { sessionStorage.setItem('tpTurning', '1'); } catch (err) {}
+            turn.classList.add('tp-turn--in');
+            setTimeout(function () { location.href = href; }, 470);
+        });
+        window.addEventListener('pageshow', function (ev) {
+            if (ev.persisted) { turning = false; turn.classList.remove('tp-turn--in', 'tp-turn--cover', 'tp-turn--out'); }
+        });
+    }
+
+    /* --- magnetic buttons --- */
+    if (fine && !reduced) {
+        document.querySelectorAll('.ph-btn, .site-footer .btn--ghost').forEach(function (btn) {
+            btn.classList.add('tp-magnet');
+            btn.addEventListener('pointermove', function (e) {
+                var r = btn.getBoundingClientRect();
+                var dx = (e.clientX - (r.left + r.width / 2)) / r.width;
+                var dy = (e.clientY - (r.top + r.height / 2)) / r.height;
+                btn.style.transform = 'translate(' + (dx * 10).toFixed(1) + 'px,' + (dy * 8).toFixed(1) + 'px)';
+            });
+            btn.addEventListener('pointerleave', function () { btn.style.transform = ''; });
+        });
+    }
+
+    /* --- film reel: draggable + flingable, auto-glides, IO-gated --- */
+    var track = document.querySelector('.tp-strip__track');
+    if (track && !reduced) {
+        track.classList.add('tp-js');
+        var off = 0, vel = 0, auto = 0.55, dragging = false, lastX = 0, visible = false, running = false, hovered = false;
+        var half = 0;
+        function measureTrack() { half = track.scrollWidth / 2; }
+        measureTrack(); window.addEventListener('resize', measureTrack);
+        window.addEventListener('load', measureTrack);
+        function tick() {
+            if (!visible || document.hidden) { running = false; return; }
+            if (!dragging) {
+                if (Math.abs(vel) > 0.05) { off -= vel; vel *= 0.94; }
+                else if (!hovered) { off -= auto; }
+            }
+            if (half > 0) { off = ((off % half) + half) % half; }
+            track.style.transform = 'translate3d(' + (-off) + 'px,0,0)';
+            requestAnimationFrame(tick);
+        }
+        function start() { if (!running) { running = true; requestAnimationFrame(tick); } }
+        new IntersectionObserver(function (en) {
+            visible = en[0].isIntersecting; if (visible) start();
+        }, { threshold: 0 }).observe(track);
+        document.addEventListener('visibilitychange', function () { if (!document.hidden && visible) start(); });
+        track.addEventListener('pointerenter', function () { hovered = true; });
+        track.addEventListener('pointerleave', function () { hovered = false; });
+        track.addEventListener('pointerdown', function (e) {
+            dragging = true; lastX = e.clientX; vel = 0;
+            track.classList.add('tp-dragging');
+            track.setPointerCapture && track.setPointerCapture(e.pointerId);
+        });
+        track.addEventListener('pointermove', function (e) {
+            if (!dragging) return;
+            var d = e.clientX - lastX; lastX = e.clientX;
+            off -= d; vel = d * 0.9;
+        });
+        ['pointerup', 'pointercancel'].forEach(function (ev) {
+            track.addEventListener(ev, function () { dragging = false; track.classList.remove('tp-dragging'); });
+        });
+        track.addEventListener('dragstart', function (e) { e.preventDefault(); });
+    }
+
+    /* --- concierge card (homepage, once per session) --- */
+    if (onHome && !reduced) {
+        var seenC = false;
+        try { seenC = sessionStorage.getItem('tpConcierge') === '1'; } catch (e) {}
+        if (!seenC) {
+            setTimeout(function () {
+                try { sessionStorage.setItem('tpConcierge', '1'); } catch (e) {}
+                var hr = new Date().getHours();
+                var msg = hr < 12 ? 'Good morning. The lobby is bathed in light - breakfast is waiting.'
+                        : hr < 17 ? 'Good afternoon. The banquet halls are glowing today. Shall we show you around?'
+                        : 'Good evening. The rooftop is lovely right now - the lights just came on.';
+                var card = document.createElement('div');
+                card.className = 'tp-concierge';
+                card.innerHTML = '<p class="tp-concierge__label">THE PAGE CONCIERGE</p><p class="tp-concierge__msg"></p><button class="tp-concierge__close" aria-label="Close">&#10005;</button>';
+                document.body.appendChild(card);
+                var msgEl = card.querySelector('.tp-concierge__msg');
+                requestAnimationFrame(function () { card.classList.add('tp-on'); });
+                var i = 0;
+                var typer = setInterval(function () {
+                    msgEl.textContent = msg.slice(0, ++i);
+                    if (i >= msg.length) { clearInterval(typer); card.classList.add('tp-done'); }
+                }, 34);
+                function bye() { card.classList.remove('tp-on'); setTimeout(function () { card.remove(); }, 700); }
+                card.querySelector('.tp-concierge__close').addEventListener('click', bye);
+                setTimeout(bye, 14000);
+            }, 3500);
+        }
+    }
+
+    /* --- soft chime on first interaction + mute toggle --- */
+    (function () {
+        var muted = false;
+        try { muted = localStorage.getItem('tpSound') === 'off'; } catch (e) {}
+        var btn = document.createElement('button');
+        btn.className = 'tp-sound';
+        btn.title = 'Sound';
+        btn.innerHTML = '&#9834;';
+        btn.setAttribute('data-muted', muted ? '1' : '0');
+        document.body.appendChild(btn);
+        function chime() {
+            try {
+                var ctx = new (window.AudioContext || window.webkitAudioContext)();
+                [659.25, 987.77].forEach(function (freq, i) {
+                    var o = ctx.createOscillator(), g = ctx.createGain();
+                    o.type = 'sine'; o.frequency.value = freq;
+                    g.gain.setValueAtTime(0, ctx.currentTime + i * 0.22);
+                    g.gain.linearRampToValueAtTime(0.035, ctx.currentTime + i * 0.22 + 0.03);
+                    g.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + i * 0.22 + 1.4);
+                    o.connect(g).connect(ctx.destination);
+                    o.start(ctx.currentTime + i * 0.22); o.stop(ctx.currentTime + i * 0.22 + 1.5);
+                });
+                setTimeout(function () { ctx.close(); }, 2200);
+            } catch (e) {}
+        }
+        var played = false;
+        try { played = sessionStorage.getItem('tpChimed') === '1'; } catch (e) {}
+        function firstTouch() {
+            document.removeEventListener('pointerdown', firstTouch);
+            if (muted || played) return;
+            try { sessionStorage.setItem('tpChimed', '1'); } catch (e) {}
+            chime();
+        }
+        document.addEventListener('pointerdown', firstTouch);
+        btn.addEventListener('click', function (e) {
+            e.stopPropagation();
+            muted = !muted;
+            btn.setAttribute('data-muted', muted ? '1' : '0');
+            try { localStorage.setItem('tpSound', muted ? 'off' : 'on'); } catch (err) {}
+            if (!muted) chime();
+        });
+    })();
+
+    /* --- gold ink trail (desktop, sleeps when faded) --- */
+    if (fine && !reduced) {
+        var cv = document.createElement('canvas');
+        cv.className = 'tp-ink';
+        document.body.appendChild(cv);
+        var ictx = cv.getContext('2d');
+        var pts = [], inkRunning = false, dpr = Math.min(2, window.devicePixelRatio || 1);
+        function sizeInk() { cv.width = innerWidth * dpr; cv.height = innerHeight * dpr; }
+        sizeInk(); window.addEventListener('resize', sizeInk);
+        document.addEventListener('pointermove', function (e) {
+            pts.push({ x: e.clientX * dpr, y: e.clientY * dpr, a: 1 });
+            if (pts.length > 26) pts.shift();
+            if (!inkRunning) { inkRunning = true; requestAnimationFrame(inkTick); }
+        }, { passive: true });
+        function inkTick() {
+            ictx.clearRect(0, 0, cv.width, cv.height);
+            var alive = false;
+            for (var i = 1; i < pts.length; i++) {
+                var p = pts[i];
+                p.a -= 0.035;
+                if (p.a <= 0) continue;
+                alive = true;
+                ictx.strokeStyle = 'rgba(255,195,113,' + (p.a * 0.35).toFixed(3) + ')';
+                ictx.lineWidth = 1.6 * dpr * p.a;
+                ictx.lineCap = 'round';
+                ictx.beginPath();
+                ictx.moveTo(pts[i - 1].x, pts[i - 1].y);
+                ictx.lineTo(p.x, p.y);
+                ictx.stroke();
+            }
+            if (alive) requestAnimationFrame(inkTick);
+            else { inkRunning = false; pts.length = 0; ictx.clearRect(0, 0, cv.width, cv.height); }
+        }
+    }
 })();
