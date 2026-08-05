@@ -162,6 +162,10 @@ html.tp-anim .tp-reveal{opacity:1;transform:none;transition:none}
 .tp-sound{width:2.2rem;height:2.2rem;left:.9rem;bottom:.9rem;font-size:.85rem}
 .tp-marquee__track span{font-size:.85rem;letter-spacing:.14em}
 .tp-marquee{padding:1rem 0}
+/* headings: never break mid-word, fit one line where possible */
+.block__heading,.heading__wrapper .heading,.home__hero .hero-content .heading,h1.heading,h2.heading,h3.heading{word-break:normal;overflow-wrap:normal;hyphens:none}
+.block__heading{font-size:1.25rem;letter-spacing:.11em}
+.hero--full .hero-content .heading{font-size:clamp(1.5rem,7vw,2.1rem);letter-spacing:.08em}
 /* keep everything inside the screen */
 html,body{overflow-x:hidden}
 }
