@@ -172,8 +172,8 @@ html.tp-anim .tp-reveal{opacity:1;transform:none;transition:none}
 .heading__motif{width:1.15rem;height:1.15rem}
 .tp-marquee{padding:.85rem 0}
 /* headings: never break mid-word, fit one line where possible */
-.block__heading,.heading__wrapper .heading,.home__hero .hero-content .heading,h1.heading,h2.heading,h3.heading{word-break:normal;overflow-wrap:normal;hyphens:none}
-.block__heading{font-size:1.5rem;letter-spacing:.13em}
+.block__heading,.heading__wrapper .heading,.home__hero .hero-content .heading,h1.heading,h2.heading,h3.heading{word-break:normal;overflow-wrap:normal;hyphens:none;text-wrap:balance}
+.block__heading{font-size:1.35rem;letter-spacing:.1em;line-height:1.35}
 .hero--full .hero-content .heading{font-size:clamp(1.5rem,7vw,2.1rem);letter-spacing:.08em}
 /* keep everything inside the screen */
 html,body{overflow-x:clip}
