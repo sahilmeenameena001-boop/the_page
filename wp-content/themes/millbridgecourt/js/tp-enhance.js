@@ -361,7 +361,9 @@ window.addEventListener('wheel', function (e) {
             master.gain.setValueAtTime(master.gain.value, ctx.currentTime);
             master.gain.linearRampToValueAtTime(v, ctx.currentTime + secs);
         }
+        var booted = false;
         function play() {
+            if (document.hidden) return; /* never start sound in a background tab */
             if (!ensureCtx()) return;
             if (ctx.state === 'suspended') ctx.resume();
             startLoop();
@@ -369,17 +371,20 @@ window.addEventListener('wheel', function (e) {
         }
         function hush() { fadeTo(0, 1); stopLoop(); }
 
-        function boot() {
+        function boot(e) {
+            if (e && e.isTrusted === false) return; /* ignore synthetic events */
             document.removeEventListener('pointerdown', boot);
             document.removeEventListener('keydown', boot);
+            booted = true;
             if (!muted) play();
         }
         document.addEventListener('pointerdown', boot);
         document.addEventListener('keydown', boot);
 
         document.addEventListener('visibilitychange', function () {
-            if (!ctx || muted) return;
-            if (document.hidden) { ctx.suspend(); } else { ctx.resume(); }
+            if (muted || !booted) return;
+            if (document.hidden) { if (ctx) { ctx.suspend(); stopLoop(); } }
+            else { play(); }
         });
 
         btn.addEventListener('click', function (e) {
