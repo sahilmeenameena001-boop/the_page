@@ -1544,17 +1544,30 @@
     </header>
     <div class="site-content">
         <main class="site-main">
-            <section class="home__hero js-hero imposter hero--full" data-color-scheme="dark">
-                <div class="background frame frame--ratio-unset">
-                    <picture> <img decoding="async" src="images/home/hero-entrance.jpg" alt="" class="hero-background-image" /> </picture>
-                </div>
-                <div class="imposter-element hero-content">
-                    <div class="container">
-                        <h1 class="heading">Luxury,comfort,and impeccable service come together to create an unforgettable stay.</h1>
-                        <div class="scroll-indicator"> <svg width="25" height="16" viewBox="0 0 25 16" fill="none" xmlns="http://www.w3.org/2000/svg"> <path d="M2.66656 7.32741C5.18199 8.01085 7.66895 5.77069 9.01684 3.85327C4.50805 -5.75283 -4.48106 5.39101 2.66656 7.32741Z" fill="#F5E1CB" /> <path d="M21.4255 7.32741C18.91 8.01085 16.4231 5.77069 15.0752 3.85327C19.584 -5.75283 28.5731 5.39101 21.4255 7.32741Z" fill="#F5E1CB" /> <path d="M8.44102 13.3337C7.75758 10.8183 9.99774 8.3313 11.9152 6.9834C21.5213 11.4922 10.3774 20.4813 8.44102 13.3337Z" fill="#F5E1CB" /> </svg></div>
+            <section class="home__hero js-hero page-hero" data-color-scheme="dark">
+                <div class="page-hero__bg"><img decoding="async" fetchpriority="high" src="images/home/hero-entrance.jpg" alt="The Page, Rohtak entrance" /></div>
+                <div class="page-hero__veil"></div>
+                <div class="page-hero__content">
+                    <p class="ph-eyebrow">LUXURY HOTEL &middot; BANQUETS &middot; ROOFTOP DINING &middot; ROHTAK</p>
+                    <h1 class="ph-title">
+                        <span class="ph-line"><span class="ph-word">Where</span> <span class="ph-word">every</span> <span class="ph-word">stay</span></span>
+                        <span class="ph-line"><span class="ph-word">becomes</span> <span class="ph-word">a</span> <span class="ph-word ph-word--accent">story.</span></span>
+                    </h1>
+                    <div class="ph-rule" aria-hidden="true"></div>
+                    <p class="ph-sub">Elegant rooms, grand banquets and rooftop dining &mdash; opposite Tilyar Lake, where impeccable service turns moments into memories.</p>
+                    <div class="ph-ctas">
+                        <a href="contact.html" class="ph-btn ph-btn--solid">Book Your Stay</a>
+                        <a href="banquet.html" class="ph-btn ph-btn--ghost">Plan an Event</a>
                     </div>
                 </div>
+                <div class="page-hero__scroll" aria-hidden="true"><span class="ph-scroll-line"></span><span class="ph-scroll-label">SCROLL</span></div>
             </section>
+            <div class="tp-marquee" aria-hidden="true">
+                <div class="tp-marquee__track">
+                    <span>Weddings <i>&#10022;</i> Grand Banquets <i>&#10022;</i> Fine Dining <i>&#10022;</i> Rooftop Lounge <i>&#10022;</i> Luxury Stays <i>&#10022;</i> Celebrations <i>&#10022;</i> Weddings <i>&#10022;</i> Grand Banquets <i>&#10022;</i> Fine Dining <i>&#10022;</i> Rooftop Lounge <i>&#10022;</i> Luxury Stays <i>&#10022;</i> Celebrations <i>&#10022;</i></span>
+                    <span>Weddings <i>&#10022;</i> Grand Banquets <i>&#10022;</i> Fine Dining <i>&#10022;</i> Rooftop Lounge <i>&#10022;</i> Luxury Stays <i>&#10022;</i> Celebrations <i>&#10022;</i> Weddings <i>&#10022;</i> Grand Banquets <i>&#10022;</i> Fine Dining <i>&#10022;</i> Rooftop Lounge <i>&#10022;</i> Luxury Stays <i>&#10022;</i> Celebrations <i>&#10022;</i></span>
+                </div>
+            </div>
             <section class="blocks" data-color-scheme="light">
                 <section class="block block--image-text" data-image-side="right" data-image-count="1" data-image-layout="1">
                     <div class="container inner">
@@ -1909,7 +1922,8 @@
                 "undefined"!=typeof URL&&URL.createObjectURL&& "undefined"!=typeof Blob)try{var e="postMessage(" +f.toString()+ "("+[JSON.stringify(s),u.toString(),c.toString(),p.toString()].join( ",")+ "));",a=new Blob([e],{type: "text/javascript"});const r=new Worker(URL.createObjectURL(a),{name:
                 "wpTestEmojiSupports"});return void(r.onmessage=e=>{i(n=e.data),r.terminate(),t(n)})}catch(e){}i(n=f(s,u,c,p))}t(n)}).then(e=>{for(const n in e)a.supports[n]=e[n],a.supports.everything=a.supports.everything&&a.supports[n],"flag"!==n&&(a.supports.everythingExceptFlag=a.supports.everythingExceptFlag&&a.supports[n]);var
                 t;a.supports.everythingExceptFlag=a.supports.everythingExceptFlag&&!a.supports.flag,a.supports.everything||((t=a.source||{}).concatemoji?r(t.concatemoji):t.wpemoji&&t.twemoji&&(r(t.twemoji),r(t.wpemoji)))}); //# sourceURL=/wp-includes/js/wp-emoji-loader.min.js</script>
-    <a href="#page" id="back-to-top" class="top no-external-link-indicator" data-version="teap91" aria-label="Back to top of page" tabindex="0"> <span class="sr-only">Back to top</span> <span aria-hidden="true">&uarr;</span> </a></body>
+    <a href="#page" id="back-to-top" class="top no-external-link-indicator" data-version="teap91" aria-label="Back to top of page" tabindex="0"> <span class="sr-only">Back to top</span> <span aria-hidden="true">&uarr;</span> </a><script defer src="wp-content/themes/millbridgecourt/js/tp-enhance.js"></script>
+</body>
 
 </html>
 <!-- Cached by WP-Optimize (gzip) - https://teamupdraft.com/wp-optimize/ - Last modified: 2 August 2026 1:13 pm (Europe/London UTC:1) -->
