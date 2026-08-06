@@ -152,8 +152,9 @@ html.tp-anim .tp-reveal{opacity:1;transform:none;transition:none}
 .ph-btn{text-align:center;padding:.95rem 1rem}
 .page-hero__scroll{bottom:1.1rem}
 .ph-scroll-line{height:2.2rem}
-/* subpage heroes: fixed-height cover banner so the title always fits */
-.hero--full{position:relative;height:21rem !important;min-height:0 !important;overflow:hidden}
+/* subpage heroes: cover banner that grows with its text */
+.hero--full{position:relative;height:auto !important;min-height:15rem !important;overflow:hidden}
+.hero--full .hero-content{position:relative !important;top:auto;left:auto;right:auto;bottom:auto;min-height:15rem !important;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:2.6rem 1.25rem}
 .hero--full .frame{position:absolute !important;inset:0;height:100% !important}
 .hero--full picture{position:absolute !important;inset:0;height:100% !important}
 .hero--full .hero-background-image{position:absolute !important;inset:0;width:100% !important;height:100% !important;max-height:none;object-fit:cover !important}
@@ -180,7 +181,7 @@ html,body{overflow-x:clip}
 }
 @media (max-width: 400px){
 .ph-title{font-size:clamp(1.9rem,10.5vw,2.4rem)}
-.hero--full{height:17rem !important}
+.hero--full{min-height:13rem !important}
 }
 /* === TP walk-into-the-hotel === */
 .site{overflow:clip}
