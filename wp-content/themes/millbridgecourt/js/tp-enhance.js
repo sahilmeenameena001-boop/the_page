@@ -190,40 +190,6 @@ window.addEventListener('wheel', function (e) {
         });
     }
 
-    /* --- page-turn navigation --- */
-    if (!reduced) {
-        var turn = document.createElement('div');
-        turn.className = 'tp-turn';
-        document.body.appendChild(turn);
-        var turning = false;
-        try {
-            if (sessionStorage.getItem('tpTurning') === '1') {
-                sessionStorage.removeItem('tpTurning');
-                turn.classList.add('tp-turn--cover');
-                requestAnimationFrame(function () { requestAnimationFrame(function () {
-                    turn.classList.add('tp-turn--out');
-                    setTimeout(function () { turn.classList.remove('tp-turn--cover', 'tp-turn--out'); }, 800);
-                }); });
-            }
-        } catch (e) {}
-        document.addEventListener('click', function (e) {
-            if (turning || e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
-            var a = e.target.closest && e.target.closest('a[href]');
-            if (!a || a.target === '_blank' || a.hasAttribute('download')) return;
-            var href = a.getAttribute('href');
-            if (!href || href.charAt(0) === '#' || /^(https?:|mailto:|tel:)/.test(href) && a.host !== location.host) return;
-            if (/^(mailto:|tel:)/.test(href)) return;
-            e.preventDefault();
-            turning = true;
-            try { sessionStorage.setItem('tpTurning', '1'); } catch (err) {}
-            turn.classList.add('tp-turn--in');
-            setTimeout(function () { location.href = href; }, 470);
-        });
-        window.addEventListener('pageshow', function (ev) {
-            if (ev.persisted) { turning = false; turn.classList.remove('tp-turn--in', 'tp-turn--cover', 'tp-turn--out'); }
-        });
-    }
-
     /* --- magnetic buttons --- */
     if (fine && !reduced) {
         document.querySelectorAll('.ph-btn, .site-footer .btn--ghost').forEach(function (btn) {
