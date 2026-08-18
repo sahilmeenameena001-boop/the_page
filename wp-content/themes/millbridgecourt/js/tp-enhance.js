@@ -110,7 +110,7 @@ window.addEventListener('wheel', function (e) {
             if (wCaption) {
                 var pc = clamp01((p - 0.7) / 0.12);
                 wCaption.style.opacity = pc.toFixed(3);
-                wCaption.style.transform = 'translateY(' + (-40 + (1 - pc) * 22) + '%)';
+                wCaption.style.transform = 'translateY(' + (-50 + (1 - pc) * 22) + '%)';
             }
         }
         function queue() { if (!queued) { queued = true; requestAnimationFrame(frame); } }
