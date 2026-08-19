@@ -1,11 +1,11 @@
 /* The Page — concierge chat.
    ============ CLIENT CONFIG — edit here ============ */
 var TP_CHAT = {
-    whatsapp: '919999999999',            /* booking WhatsApp number, country code, digits only */
+    whatsapp: '917664007601',            /* booking WhatsApp number, country code, digits only */
     aiEndpoint: '/api/chat',
     bookingUrl: 'https://thepagerohtak.bookingjini.in/', /* live rates & instant booking (Bookingjini) */             /* Vercel function; activates automatically once OPENAI_API_KEY is set in Vercel */
     rates: { deluxe: 4500, executive: 6500, suite: 9500 },
-    address: 'The Page Hotel, Delhi Bypass Road, Opposite Tilyar Lake, Rohtak, Haryana 124001'
+    address: 'The Page Hotel, Opp. Tilyar Lake, Delhi Road, Rohtak - 124001 | Call: 7664007601 / 7664007602'
 };
 /* =================================================== */
 (function () {
@@ -22,14 +22,14 @@ var TP_CHAT = {
     var KB = [
         [['rate','price','cost','tariff','room','stay','kitna','kimat','charge','suite','deluxe','executive'], RATES, 'LIVE'],
         [['book','booking','reserve','reservation','available','availability','check in date'], 'Lovely! You can check live availability and book instantly below — or send your dates on WhatsApp and our team will handle it for you.', 'LIVE'],
-        [['wedding','shaadi','marriage','banquet','event','function','reception','party','engagement','anniversary','corporate'], 'The Page Banquet hosts weddings and events for up to 500 guests, with in-house catering, décor support and a dedicated event manager. Our three halls also suit meetings and intimate parties. Event pricing is customised — our team will build a quote for you.', 'Plan my event'],
-        [['restaurant','kaagaz','food','dining','dinner','lunch','breakfast','menu','khana','eat'], 'Kaagaz Restaurant serves veg and non-veg cuisine daily, 7:30 AM to 11 PM — Indian, Continental and Pan-Asian. Jain and custom dietary menus are available on request.', null],
-        [['lounge','bar','panna','cocktail','drink','rooftop','terrace','nightlife'], 'Panna Lounge & Bar, our rooftop lounge, is open 5 PM to midnight with handcrafted cocktails, mocktails and city views. The Open Air Terrace also hosts sunset coffees and candle-lit dinners.', null],
-        [['time','timing','check-in','checkin','check out','checkout','hours','open','close'], 'Check-in is 1 PM and check-out is 11 AM. Kaagaz Restaurant: 7:30 AM–11 PM. Panna Lounge: 5 PM–midnight. Early check-in or late check-out? Ask us — we accommodate whenever possible.', null],
+        [['wedding','shaadi','marriage','banquet','event','function','reception','party','engagement','anniversary','corporate','hall','kitty'], 'Yes! We host weddings and every kind of celebration across 4 banquet halls, 3 kitty halls and a rooftop venue:\n✦ Syahi Hall (1st floor) — 15–20 pax\n✦ Kalam Hall (1st floor) — 20–25 pax\n✦ Kitaab Hall (1st floor) — 35–40 pax\n✦ Crystal 1 (2nd floor) — 80–100 pax\n✦ Crystal 2 (2nd floor) — 150–250 pax\n✦ Opus (ground floor) — 150–300 pax\n✦ Amaanat Banquet (ground floor) — 150–300 pax\n✦ 360 Degree Rooftop (5th floor) — 15–20 pax\nEvent pricing is customised — our team will build a quote for you.', 'Plan my event'],
+        [['restaurant','kaagaz','food','dining','dinner','lunch','breakfast','menu','khana','eat','veg'], 'Kaagaz Restaurant, on the 1st floor, is our pure-veg restaurant — open daily 11 AM to 11 PM (last order). Jain and custom dietary menus are available on request.', null],
+        [['lounge','bar','panna','cocktail','drink','rooftop','terrace','nightlife','alcohol'], 'Panna Lounge & Bar, our rooftop lounge, is open 5 PM to 11 PM (last order) — alcohol is served, with both veg and non-veg food, handcrafted cocktails and city views. The Open Air Terrace also hosts sunset coffees and candle-lit dinners.', null],
+        [['time','timing','check-in','checkin','check out','checkout','hours','open','close'], 'Check-in is 2 PM and check-out is 12 noon. Kaagaz Restaurant: 11 AM – 11 PM (last order). Panna Lounge: 5 PM – 11 PM (last order). Early check-in or late check-out? Ask us — we accommodate whenever possible.', null],
         [['address','location','where','direction','reach','map','kahan','distance','tilyar'], 'You will find us at: ' + TP_CHAT.address + ' — right opposite Tilyar Lake on the Delhi Bypass.', null],
-        [['parking','car','valet'], 'Yes — complimentary parking with valet service for all guests and event visitors.', null],
+        [['parking','car','valet'], 'Yes — parking is free, with 24/7 valet service for all guests and event visitors.', null],
         [['pet','dog','cat'], 'We love them, but pets are not permitted at the hotel — sorry about that.', null],
-        [['cancel','cancellation','refund'], 'Direct bookings can be cancelled free of charge up to 48 hours before check-in. Flexible-rate bookings can be cancelled anytime.', null],
+        [['cancel','cancellation','refund','no show'], 'Our cancellation policy:\n✦ Cancellation 48 hours prior to arrival — no cancellation charges\n✦ No-show — 100% of the total booking amount is charged\n✦ Early departure charges may apply\n✦ Advance / prepaid banquet and hall bookings follow their specific booking terms\n✦ Peak dates, special events and group bookings may carry separate cancellation terms', null],
         [['contact','phone','number','call','whatsapp','email'], 'The quickest way to reach us is WhatsApp — tap below and our team replies within minutes.', 'Chat on WhatsApp'],
         [['hello','hi','hey','namaste','good morning','good evening'], 'Hello! Welcome to The Page. Ask me about rooms and rates, dining, events, or anything else — or tap a quick question below.', null],
         [['thank','thanks','shukriya','great','nice'], 'A pleasure! If there is anything else, I am right here. We hope to welcome you to The Page soon. ✦', null]
