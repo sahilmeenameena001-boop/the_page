@@ -453,12 +453,6 @@ window.addEventListener('wheel', function (e) {
     var rule = story.querySelector('.tp-story__rule');
     var skip = story.querySelector('.tp-story__skip');
     var n = beats.length, span = 1, queued = false, sp = 0, over = 0, tiltX = 0, tiltY = 0;
-    var shapes = story.querySelectorAll('.tp-shape');
-    var SHAPE_CFG = [
-        { x: -Math.min(320, window.innerWidth * 0.3), y: -90, z: -220, spin: 160, fx: 1.3, fy: 0.9, ph: 0, depth: 1.4 },
-        { x: Math.min(340, window.innerWidth * 0.32), y: 60, z: -340, spin: -120, fx: 0.8, fy: 1.2, ph: 2.1, depth: 1.9 },
-        { x: -Math.min(120, window.innerWidth * 0.12), y: 190, z: -120, spin: 90, fx: 1.1, fy: 0.7, ph: 4.2, depth: 1.0 }
-    ];
     /* curve swipe overlay: covers as the story closes, peels off onto the landing page */
     var curveWrap = document.createElement('div');
     curveWrap.className = 'tp-curve';
@@ -498,21 +492,6 @@ window.addEventListener('wheel', function (e) {
             rule.style.width = (fl * 7.5) + 'rem';
         }
         if (skip) skip.style.opacity = p > 0.9 ? 0 : 1;
-        /* shapes: drift in depth through the story, then converge, spin and dissolve into the heading */
-        var fc = clamp01((p - (n - 1) / n) / (0.55 / n));
-        for (var j = 0; j < shapes.length; j++) {
-            var cfg = SHAPE_CFG[j];
-            var bobX = Math.sin(p * 6.283 * cfg.fx + cfg.ph) * 26;
-            var bobY = Math.cos(p * 6.283 * cfg.fy + cfg.ph) * 20;
-            var x = cfg.x + bobX + tiltY * cfg.depth * -1.6;
-            var y = cfg.y + bobY + tiltX * cfg.depth * 1.6;
-            x += (0 - x) * fc; y += (0 - y) * fc;
-            var rot = p * cfg.spin + fc * 260;
-            var sc = (1 - fc * 0.72);
-            shapes[j].style.opacity = ((0.9 - fc) < 0 ? 0 : (0.9 - fc)).toFixed(3);
-            shapes[j].style.filter = 'blur(' + (fc * 10).toFixed(1) + 'px)';
-            shapes[j].style.transform = 'translate(-50%,-50%) translate3d(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px,' + cfg.z + 'px) rotate(' + rot.toFixed(1) + 'deg) scale(' + sc.toFixed(3) + ')';
-        }
         /* half curve swipe: one curved band sweeps up between the story and the landing page */
         var d = null;
         if (over > 0 && over < 1) {

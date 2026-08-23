@@ -368,8 +368,3 @@ html.tp-anim .tp-reveal{filter:none;transform:none}
 /* === TP story 3d extras === */
 .tp-story__stage:after{content:"";position:absolute;inset:-50%;background-image:radial-gradient(rgba(245,225,203,.09) 1.6px,transparent 2px);background-size:76px 76px;animation:tpDrift 95s linear infinite reverse}
 .tp-final-svg{filter:drop-shadow(0 16px 34px rgba(255,195,113,.28)) drop-shadow(0 2px 6px rgba(0,0,0,.35))}
-/* === TP story shapes === */
-.tp-shape{position:absolute;left:50%;top:50%;width:7.2rem;height:7.2rem;pointer-events:none;opacity:.9;will-change:transform,opacity,filter}
-.tp-shape--sq{width:6.2rem;height:6.2rem}
-.tp-shape--cir{width:6.6rem;height:6.6rem}
-@media (max-width:760px){.tp-shape{width:4.6rem;height:4.6rem}.tp-shape--sq{width:4rem;height:4rem}.tp-shape--cir{width:4.2rem;height:4.2rem}}
