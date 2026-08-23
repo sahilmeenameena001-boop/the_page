@@ -117,7 +117,7 @@ window.addEventListener('wheel', function (e) {
         measure(); window.addEventListener('resize', function () { measure(); queue(); });
         window.addEventListener('load', function () { measure(); queue(); });
         window.addEventListener('scroll', function () {
-            wp = clamp01(window.scrollY / span);
+            wp = clamp01(-walk.getBoundingClientRect().top / span);
             queue();
         }, { passive: true });
         walk.addEventListener('pointermove', function (e) {
@@ -422,4 +422,129 @@ window.addEventListener('wheel', function (e) {
             else { inkRunning = false; pts.length = 0; ictx.clearRect(0, 0, cv.width, cv.height); }
         }
     }
+})();
+/* === magnetic menu button (GSAP-style, vanilla) === */
+(function () {
+    'use strict';
+    if (!window.matchMedia('(pointer: fine)').matches) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var btn = document.querySelector('.btn--menu-trigger');
+    if (!btn) return;
+    var strength = 0.45;
+    btn.addEventListener('mousemove', function (e) {
+        var rect = btn.getBoundingClientRect();
+        var x = (e.clientX - (rect.left + rect.width / 2));
+        var y = (e.clientY - (rect.top + rect.height / 2));
+        btn.style.transition = 'transform .4s cubic-bezier(.33,1,.68,1)';
+        btn.style.transform = 'translate(' + (x * strength).toFixed(1) + 'px,' + (y * strength).toFixed(1) + 'px)';
+    });
+    btn.addEventListener('mouseleave', function () {
+        btn.style.transition = 'transform .7s cubic-bezier(.34,2.4,.44,.86)'; /* elastic-style overshoot */
+        btn.style.transform = 'translate(0,0)';
+    });
+})();
+/* === scroll story prologue driver === */
+(function () {
+    'use strict';
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var story = document.querySelector('.tp-story');
+    if (!story) return;
+    var beats = story.querySelectorAll('.tp-story__beat');
+    var rule = story.querySelector('.tp-story__rule');
+    var skip = story.querySelector('.tp-story__skip');
+    var n = beats.length, span = 1, queued = false, sp = 0, over = 0, tiltX = 0, tiltY = 0;
+    var shapes = story.querySelectorAll('.tp-shape');
+    var SHAPE_CFG = [
+        { x: -Math.min(320, window.innerWidth * 0.3), y: -90, z: -220, spin: 160, fx: 1.3, fy: 0.9, ph: 0, depth: 1.4 },
+        { x: Math.min(340, window.innerWidth * 0.32), y: 60, z: -340, spin: -120, fx: 0.8, fy: 1.2, ph: 2.1, depth: 1.9 },
+        { x: -Math.min(120, window.innerWidth * 0.12), y: 190, z: -120, spin: 90, fx: 1.1, fy: 0.7, ph: 4.2, depth: 1.0 }
+    ];
+    /* curve swipe overlay: covers as the story closes, peels off onto the landing page */
+    var curveWrap = document.createElement('div');
+    curveWrap.className = 'tp-curve';
+    curveWrap.innerHTML = '<svg viewBox="0 0 100 100" preserveAspectRatio="none"><defs><linearGradient id="tpGrad" x1="0" y1="0" x2="99" y2="99" gradientUnits="userSpaceOnUse"><stop offset="0.15" stop-color="#FFC371"/><stop offset="0.85" stop-color="#F5E1CB"/></linearGradient></defs><path class="tp-curve__path" fill="url(#tpGrad)" d="M 0 100 V 100 Q 50 100 100 100 V 100 z"/></svg>';
+    document.body.appendChild(curveWrap);
+    var curvePath = curveWrap.querySelector('.tp-curve__path');
+    function clamp01(v) { return v < 0 ? 0 : v > 1 ? 1 : v; }
+    function measure() { span = Math.max(1, story.offsetHeight - window.innerHeight); }
+    function frame() {
+        queued = false;
+        var p = sp;
+        for (var i = 0; i < n; i++) {
+            var a = i / n, b = (i + 1) / n, w = b - a;
+            var lp = clamp01((p - a) / w);
+            /* 3D fly-through: each line approaches from deep space, passes overhead */
+            var dist = (lp - 0.5) * 2;
+            if (i === 0) dist = Math.max(0, dist);            /* first line starts centered */
+            if (i === n - 1) {
+                dist = Math.min(0, dist);                     /* the final line arrives and stays */
+                var ink = beats[i].querySelector('.tp-final-text');
+                if (ink) {
+                    var dp = clamp01(lp / 0.62);
+                    ink.style.strokeDashoffset = (420 * (1 - dp)).toFixed(1);
+                    ink.style.fillOpacity = clamp01((lp - 0.5) / 0.32).toFixed(3);
+                }
+            }
+            var ad = Math.abs(dist);
+            var vis = clamp01(1 - ad * 1.15);
+            var z = dist < 0 ? dist * 560 : dist * 400;
+            var rx = -dist * 24 + tiltX;
+            beats[i].style.opacity = vis.toFixed(3);
+            beats[i].style.filter = 'blur(' + (ad * 9).toFixed(1) + 'px)';
+            beats[i].style.transform = 'translate(-50%,-50%) translateZ(' + z.toFixed(1) + 'px) rotateX(' + rx.toFixed(2) + 'deg) rotateY(' + tiltY.toFixed(2) + 'deg)';
+        }
+        if (rule) {
+            var fl = clamp01((p - (n - 1) / n) / (1 / n));
+            rule.style.width = (fl * 7.5) + 'rem';
+        }
+        if (skip) skip.style.opacity = p > 0.9 ? 0 : 1;
+        /* shapes: drift in depth through the story, then converge, spin and dissolve into the heading */
+        var fc = clamp01((p - (n - 1) / n) / (0.55 / n));
+        for (var j = 0; j < shapes.length; j++) {
+            var cfg = SHAPE_CFG[j];
+            var bobX = Math.sin(p * 6.283 * cfg.fx + cfg.ph) * 26;
+            var bobY = Math.cos(p * 6.283 * cfg.fy + cfg.ph) * 20;
+            var x = cfg.x + bobX + tiltY * cfg.depth * -1.6;
+            var y = cfg.y + bobY + tiltX * cfg.depth * 1.6;
+            x += (0 - x) * fc; y += (0 - y) * fc;
+            var rot = p * cfg.spin + fc * 260;
+            var sc = (1 - fc * 0.72);
+            shapes[j].style.opacity = ((0.9 - fc) < 0 ? 0 : (0.9 - fc)).toFixed(3);
+            shapes[j].style.filter = 'blur(' + (fc * 10).toFixed(1) + 'px)';
+            shapes[j].style.transform = 'translate(-50%,-50%) translate3d(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px,' + cfg.z + 'px) rotate(' + rot.toFixed(1) + 'deg) scale(' + sc.toFixed(3) + ')';
+        }
+        /* half curve swipe: one curved band sweeps up between the story and the landing page */
+        var d = null;
+        if (over > 0 && over < 1) {
+            var s = Math.sin(Math.PI * over);
+            var yT = 100 - over * 170;
+            var yB = Math.min(100.5, yT + 62);
+            d = 'M 0 ' + yT.toFixed(2) + ' Q 50 ' + (yT - 30 * s).toFixed(2) + ' 100 ' + yT.toFixed(2) +
+                ' L 100 ' + yB.toFixed(2) + ' Q 50 ' + (yB + 30 * s).toFixed(2) + ' 0 ' + yB.toFixed(2) + ' z';
+        }
+        if (d) { curveWrap.style.display = 'block'; curvePath.setAttribute('d', d); }
+        else { curveWrap.style.display = 'none'; }
+    }
+    function queue() { if (!queued) { queued = true; requestAnimationFrame(frame); } }
+    measure();
+    window.addEventListener('resize', function () { measure(); queue(); });
+    window.addEventListener('load', function () { measure(); queue(); });
+    window.addEventListener('scroll', function () {
+        var r = story.getBoundingClientRect();
+        sp = clamp01(-r.top / span);
+        over = clamp01((-r.top - span * 0.94) / (span * 0.06 + window.innerHeight * 0.5));
+        queue();
+    }, { passive: true });
+    skip.addEventListener('click', function () {
+        window.scrollTo({ top: story.offsetTop + story.offsetHeight - window.innerHeight + 2, behavior: 'smooth' });
+    });
+    if (window.matchMedia('(pointer: fine)').matches) {
+        story.addEventListener('pointermove', function (e) {
+            tiltY = (e.clientX / window.innerWidth - 0.5) * 16;
+            tiltX = -(e.clientY / window.innerHeight - 0.5) * 11;
+            queue();
+        });
+        story.addEventListener('pointerleave', function () { tiltX = 0; tiltY = 0; queue(); });
+    }
+    queue();
 })();
