@@ -452,6 +452,8 @@ window.addEventListener('wheel', function (e) {
     var beats = story.querySelectorAll('.tp-story__beat');
     var rule = story.querySelector('.tp-story__rule');
     var skip = story.querySelector('.tp-story__skip');
+    var stage = story.querySelector('.tp-story__stage');
+    var hcta = document.querySelector('.tp-hcta');
     var n = beats.length, span = 1, queued = false, sp = 0, over = 0, tiltX = 0, tiltY = 0;
     /* curve swipe overlay: covers as the story closes, peels off onto the landing page */
     var curveWrap = document.createElement('div');
@@ -503,6 +505,14 @@ window.addEventListener('wheel', function (e) {
         }
         if (d) { curveWrap.style.display = 'block'; curvePath.setAttribute('d', d); }
         else { curveWrap.style.display = 'none'; }
+        /* fade the green story stage away as the curve sweeps, so only the landing page is behind it */
+        if (stage) stage.style.opacity = over > 0 ? clamp01(1 - over / 0.5).toFixed(3) : '';
+        /* header CTAs stay hidden during the story, appear once the swipe completes */
+        if (hcta) {
+            var hv = clamp01((over - 0.55) / 0.35);
+            hcta.style.opacity = hv.toFixed(3);
+            hcta.style.pointerEvents = hv > 0.5 ? '' : 'none';
+        }
     }
     function queue() { if (!queued) { queued = true; requestAnimationFrame(frame); } }
     measure();
