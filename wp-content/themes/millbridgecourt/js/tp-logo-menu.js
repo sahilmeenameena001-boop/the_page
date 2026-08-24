@@ -24,9 +24,18 @@
         /* the theme only colour-flips the header on front-page/single-post bodies,
            so watch scroll ourselves: cream over the hero, ink over light content */
         var hero = document.querySelector('.js-hero');
+        /* no hover on touch screens, so there the morph replays each time the
+           logo crosses the hero boundary (same point the colour flips) */
+        var replayOnFlip = window.matchMedia('(hover: none)').matches;
+        var wasInk = false, tl = null;
         function logoInk() {
             var limit = hero ? hero.offsetTop + hero.offsetHeight - 80 : window.innerHeight * 0.7;
-            btn.classList.toggle('tp-logo-ink', window.scrollY > limit);
+            var ink = window.scrollY > limit;
+            if (ink !== wasInk) {
+                wasInk = ink;
+                if (replayOnFlip && tl) tl.restart();
+            }
+            btn.classList.toggle('tp-logo-ink', ink);
         }
         window.addEventListener('scroll', logoInk, { passive: true });
         logoInk();
@@ -37,7 +46,7 @@
         var WM_A = 120.5, WM_C = 241.092, EB = { x: 23.5, y: 101.5 }, EC = { x: 31.232, y: 0 };
         gsap.set(WM, { y: WM_A });
         gsap.set(EMB, { opacity: 0, x: EB.x - EC.x, y: EB.y - EC.y });
-        var tl = gsap.timeline({ defaults: { ease: 'power3.inOut' } })
+        tl = gsap.timeline({ defaults: { ease: 'power3.inOut' } })
             .to(['#phlm-caption-left', '#phlm-caption-right'], { opacity: 0, scaleX: 0.55, transformOrigin: '50% 50%', duration: 0.5, stagger: 0.05 }, 0.55)
             .to('#phlm-script', { opacity: 0, y: -16, duration: 0.55 }, 0.62)
             .to('#phlm-wordmark', { scaleY: 0.9, y: 9, transformOrigin: '50% 100%', opacity: 0, duration: 0.65 }, 0.74)
