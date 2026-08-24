@@ -448,7 +448,7 @@ window.addEventListener('wheel', function (e) {
     'use strict';
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     var story = document.querySelector('.tp-story');
-    if (!story) return;
+    if (!story) { document.documentElement.classList.remove('tp-story-boot'); return; }
     var beats = story.querySelectorAll('.tp-story__beat');
     var rule = story.querySelector('.tp-story__rule');
     var skip = story.querySelector('.tp-story__skip');
@@ -513,6 +513,8 @@ window.addEventListener('wheel', function (e) {
             hcta.style.opacity = hv.toFixed(3);
             hcta.style.pointerEvents = hv > 0.5 ? '' : 'none';
         }
+        /* inline styles now govern the CTAs; release the boot-hide from the head snippet */
+        document.documentElement.classList.remove('tp-story-boot');
     }
     function queue() { if (!queued) { queued = true; requestAnimationFrame(frame); } }
     measure();
