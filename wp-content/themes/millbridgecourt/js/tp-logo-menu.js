@@ -37,7 +37,7 @@
         var WM_A = 120.5, WM_C = 241.092, EB = { x: 23.5, y: 101.5 }, EC = { x: 31.232, y: 0 };
         gsap.set(WM, { y: WM_A });
         gsap.set(EMB, { opacity: 0, x: EB.x - EC.x, y: EB.y - EC.y });
-        gsap.timeline({ defaults: { ease: 'power3.inOut' } })
+        var tl = gsap.timeline({ defaults: { ease: 'power3.inOut' } })
             .to(['#phlm-caption-left', '#phlm-caption-right'], { opacity: 0, scaleX: 0.55, transformOrigin: '50% 50%', duration: 0.5, stagger: 0.05 }, 0.55)
             .to('#phlm-script', { opacity: 0, y: -16, duration: 0.55 }, 0.62)
             .to('#phlm-wordmark', { scaleY: 0.9, y: 9, transformOrigin: '50% 100%', opacity: 0, duration: 0.65 }, 0.74)
@@ -55,6 +55,9 @@
             .to(WM, { y: WM_C, duration: 1.05 }, 'b+=0.55')
             .to('#phlm-wordmark', { opacity: 1, duration: 0.8 }, 'b+=0.72')
             .to(parts, { opacity: 1, y: 0, duration: 0.6, stagger: 0.07, ease: 'power2.out' }, 'b+=1.15');
+        /* replay the morph on every hover */
+        btn.addEventListener('mouseenter', function () { tl.restart(); });
+
     }
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
     else init();
