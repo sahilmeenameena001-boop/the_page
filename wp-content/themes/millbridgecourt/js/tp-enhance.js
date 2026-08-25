@@ -453,6 +453,7 @@ window.addEventListener('wheel', function (e) {
     var rule = story.querySelector('.tp-story__rule');
     var skip = story.querySelector('.tp-story__skip');
     var stage = story.querySelector('.tp-story__stage');
+    var glow = story.querySelector('.tp-story__glow');
     var hcta = document.querySelector('.tp-hcta');
     var n = beats.length, span = 1, queued = false, sp = 0, over = 0, tiltX = 0, tiltY = 0;
     /* curve swipe overlay: covers as the story closes, peels off onto the landing page */
@@ -466,9 +467,11 @@ window.addEventListener('wheel', function (e) {
     function frame() {
         queued = false;
         var p = sp;
+        var peakVis = 0;
         for (var i = 0; i < n; i++) {
             var a = i / n, b = (i + 1) / n, w = b - a;
-            var lp = clamp01((p - a) / w);
+            /* the final beat resolves sooner, so the payoff holds on screen longer */
+            var lp = clamp01((p - a) / (i === n - 1 ? w * 0.7 : w));
             /* 3D fly-through: each line approaches from deep space, passes overhead */
             var dist = (lp - 0.5) * 2;
             if (i === 0) dist = Math.max(0, dist);            /* first line starts centered */
@@ -478,7 +481,7 @@ window.addEventListener('wheel', function (e) {
                 if (ink) {
                     var dp = clamp01(lp / 0.62);
                     ink.style.strokeDashoffset = (420 * (1 - dp)).toFixed(1);
-                    ink.style.fillOpacity = clamp01((lp - 0.5) / 0.32).toFixed(3);
+                    ink.style.fillOpacity = clamp01((lp - 0.55) / 0.38).toFixed(3);
                 }
             }
             var ad = Math.abs(dist);
@@ -488,9 +491,18 @@ window.addEventListener('wheel', function (e) {
             beats[i].style.opacity = vis.toFixed(3);
             beats[i].style.filter = 'blur(' + (ad * 9).toFixed(1) + 'px)';
             beats[i].style.transform = 'translate(-50%,-50%) translateZ(' + z.toFixed(1) + 'px) rotateX(' + rx.toFixed(2) + 'deg) rotateY(' + tiltY.toFixed(2) + 'deg)';
+            if (vis > peakVis) peakVis = vis;
         }
+        /* soft radial glow tracks the active line; dots parallax slower than the text */
+        if (glow) glow.style.opacity = (peakVis * (p > 0.8 ? 0.95 : 0.7)).toFixed(3);
+        if (stage) stage.style.setProperty('--tp-par', (-p * 120).toFixed(1));
+        story.classList.toggle('tp-story--payoff', p > 0.86);
+        /* facade reveal scenes: abstract lines -> structure -> lit hotel -> full reveal */
+        story.classList.toggle('tp-story--s2', p > 0.22);
+        story.classList.toggle('tp-story--s3', p > 0.45);
+        story.classList.toggle('tp-story--s4', p > 0.62);
         if (rule) {
-            var fl = clamp01((p - (n - 1) / n) / (1 / n));
+            var fl = clamp01((p - 0.875) / 0.065);
             rule.style.width = (fl * 7.5) + 'rem';
         }
         if (skip) skip.style.opacity = p > 0.9 ? 0 : 1;
@@ -518,6 +530,7 @@ window.addEventListener('wheel', function (e) {
     }
     function queue() { if (!queued) { queued = true; requestAnimationFrame(frame); } }
     measure();
+    story.classList.add('tp-story--live'); /* scene-1 lines draw in on load */
     window.addEventListener('resize', function () { measure(); queue(); });
     window.addEventListener('load', function () { measure(); queue(); });
     window.addEventListener('scroll', function () {
