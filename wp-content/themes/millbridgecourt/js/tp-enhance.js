@@ -456,12 +456,61 @@ window.addEventListener('wheel', function (e) {
     var glow = story.querySelector('.tp-story__glow');
     var hcta = document.querySelector('.tp-hcta');
     var n = beats.length, span = 1, queued = false, sp = 0, over = 0, tiltX = 0, tiltY = 0;
-    /* curve swipe overlay: covers as the story closes, peels off onto the landing page */
-    var curveWrap = document.createElement('div');
-    curveWrap.className = 'tp-curve';
-    curveWrap.innerHTML = '<svg viewBox="0 0 100 100" preserveAspectRatio="none"><defs><linearGradient id="tpGrad" x1="0" y1="0" x2="99" y2="99" gradientUnits="userSpaceOnUse"><stop offset="0.15" stop-color="#FFC371"/><stop offset="0.85" stop-color="#F5E1CB"/></linearGradient></defs><path class="tp-curve__path" fill="url(#tpGrad)" d="M 0 100 V 100 Q 50 100 100 100 V 100 z"/></svg>';
-    document.body.appendChild(curveWrap);
-    var curvePath = curveWrap.querySelector('.tp-curve__path');
+    /* octagon intro: a cream sheet closes over the story, then its window opens onto the hero */
+    var octa = document.createElement('div');
+    octa.className = 'tp-octa';
+    octa.setAttribute('aria-hidden', 'true');
+    octa.innerHTML = '<div class="tp-octa__photo"><img alt="" decoding="async" /></div>' +
+        '<svg class="tp-octa__mask" viewBox="0 0 4036 1672" preserveAspectRatio="xMidYMid slice">' +
+        '<path fill="#F5E1CB" fill-rule="evenodd" d="M0 0H4036V1672H0ZM1956.63 694.86H2072.37L2114.86 737.39V935.59L2072.22 974.14H1956.78L1914.14 935.59V737.39Z"/></svg>';
+    document.body.appendChild(octa);
+    var octaImg = octa.querySelector('.tp-octa__photo img');
+    var octaMask = octa.querySelector('.tp-octa__mask');
+    /* the window opens onto the very shot the landing hero is wearing (it swaps by time of day) */
+    var heroShot = document.querySelector('.tp-walk__scene--entrance img');
+    octaImg.src = heroShot ? (heroShot.currentSrc || heroShot.src) : 'images/home/hero-dusk.jpg';
+    /* octagon size in the 4036x1672 viewBox, and how far it must grow to swallow the screen */
+    var OCTA_VB_W = 4036, OCTA_VB_H = 1672, OCTA_W = 200.72, OCTA_H = 279.28, octaMax = 20;
+    function measureOcta() {
+        var W = window.innerWidth, H = window.innerHeight;
+        var k = Math.max(W / OCTA_VB_W, H / OCTA_VB_H); /* preserveAspectRatio="slice" */
+        octaMax = Math.max(W / (OCTA_W * k), H / (OCTA_H * k)) * 1.12;
+    }
+    measureOcta();
+    /* the reveal plays itself: the story lands its last line, then the window opens on its own.
+       'idle' waits at the end of the story, 'playing' runs the timeline, 'done' has handed over. */
+    var OCTA_MS = 2800, octaState = 'idle', octaP = 0, octaT0 = 0, octaPinY = 0, octaJumped = false;
+    var octaArmed = false;   /* only fires after the story has actually been watched through */
+    var walkEl = document.querySelector('.tp-walk');
+    function startOcta() {
+        octaState = 'playing'; octaArmed = false; octaP = 0; octaT0 = 0; octaJumped = false;
+        octaPinY = window.scrollY;
+        requestAnimationFrame(octaTick);
+    }
+    function octaTick(now) {
+        if (octaState !== 'playing') return;
+        if (!octaT0) octaT0 = now;
+        octaP = clamp01((now - octaT0) / OCTA_MS);
+        /* once the cream sheet is solid, drop the page onto the landing hero behind it */
+        if (!octaJumped && octaP >= 0.1) {
+            octaJumped = true;
+            if (walkEl) octaPinY = Math.round(walkEl.getBoundingClientRect().top + window.scrollY);
+            window.scrollTo(0, octaPinY);
+        }
+        queue();
+        if (octaP < 1) { requestAnimationFrame(octaTick); return; }
+        octaState = 'done';
+        var re = story.getBoundingClientRect();   /* resync the scroll figures we held frozen */
+        sp = clamp01(-re.top / span);
+        over = clamp01((-re.top - span * 0.94) / (span * 0.06 + window.innerHeight * 0.5));
+        queue();
+    }
+    /* arm only while the story is still running, so a reload landing past it never replays */
+    function syncOcta() {
+        var past = -story.getBoundingClientRect().top - span * 0.94 > 0;
+        octaArmed = !past;
+        if (past && octaState === 'idle') octaState = 'done';
+    }
     function clamp01(v) { return v < 0 ? 0 : v > 1 ? 1 : v; }
     function measure() { span = Math.max(1, story.offsetHeight - window.innerHeight); }
     function frame() {
@@ -506,22 +555,25 @@ window.addEventListener('wheel', function (e) {
             rule.style.width = (fl * 7.5) + 'rem';
         }
         if (skip) skip.style.opacity = p > 0.9 ? 0 : 1;
-        /* half curve swipe: one curved band sweeps up between the story and the landing page */
-        var d = null;
-        if (over > 0 && over < 1) {
-            var s = Math.sin(Math.PI * over);
-            var yT = 100 - over * 170;
-            var yB = Math.min(100.5, yT + 62);
-            d = 'M 0 ' + yT.toFixed(2) + ' Q 50 ' + (yT - 30 * s).toFixed(2) + ' 100 ' + yT.toFixed(2) +
-                ' L 100 ' + yB.toFixed(2) + ' Q 50 ' + (yB + 30 * s).toFixed(2) + ' 0 ' + yB.toFixed(2) + ' z';
-        }
-        if (d) { curveWrap.style.display = 'block'; curvePath.setAttribute('d', d); }
-        else { curveWrap.style.display = 'none'; }
-        /* fade the green story stage away as the curve sweeps, so only the landing page is behind it */
-        if (stage) stage.style.opacity = over > 0 ? clamp01(1 - over / 0.5).toFixed(3) : '';
-        /* header CTAs stay hidden during the story, appear once the swipe completes */
+        /* octagon intro: runs on its own clock once the story lands - scroll no longer scrubs it */
+        var ov = octaState === 'playing' ? octaP : (octaState === 'done' ? 1 : 0);
+        if (ov > 0 && ov < 1) {
+            octa.style.display = 'block';
+            var oin = clamp01(ov / 0.1);               /* cream sheet closes over the story */
+            var oout = clamp01((ov - 0.8) / 0.2);      /* dissolves into the real hero at the end */
+            octa.style.opacity = (oin * (1 - oout)).toFixed(3);
+            var op = clamp01((ov - 0.1) / 0.7);
+            var oe = op < 0.5 ? 4 * op * op * op : 1 - Math.pow(2 - 2 * op, 3) / 2; /* ease in-out */
+            octaMask.style.transform = 'scale(' + (1 + (octaMax - 1) * oe).toFixed(3) + ')';
+            octaImg.style.transform = 'scale(' + (1.06 - 0.06 * oe).toFixed(4) + ')';
+        } else { octa.style.display = 'none'; }
+        /* stage and CTAs stay scroll-linked, so scrolling back up restores the story untouched */
+        var sv = octaState === 'playing' ? octaP : over;
+        /* fade the green story stage away behind the sheet, so only the landing page is left */
+        if (stage) stage.style.opacity = sv > 0 ? clamp01(1 - sv / 0.5).toFixed(3) : '';
+        /* header CTAs stay hidden during the story, appear once the reveal completes */
         if (hcta) {
-            var hv = clamp01((over - 0.55) / 0.35);
+            var hv = clamp01((sv - 0.55) / 0.35);
             hcta.style.opacity = hv.toFixed(3);
             hcta.style.pointerEvents = hv > 0.5 ? '' : 'none';
         }
@@ -530,13 +582,21 @@ window.addEventListener('wheel', function (e) {
     }
     function queue() { if (!queued) { queued = true; requestAnimationFrame(frame); } }
     measure();
+    syncOcta();
     story.classList.add('tp-story--live'); /* scene-1 lines draw in on load */
-    window.addEventListener('resize', function () { measure(); queue(); });
-    window.addEventListener('load', function () { measure(); queue(); });
+    window.addEventListener('resize', function () { measure(); measureOcta(); queue(); });
+    window.addEventListener('load', function () { measure(); measureOcta(); syncOcta(); queue(); });
     window.addEventListener('scroll', function () {
+        if (octaState === 'playing') {   /* hold the page still for the length of the reveal */
+            if (Math.abs(window.scrollY - octaPinY) > 1) window.scrollTo(0, octaPinY);
+            return;
+        }
         var r = story.getBoundingClientRect();
         sp = clamp01(-r.top / span);
         over = clamp01((-r.top - span * 0.94) / (span * 0.06 + window.innerHeight * 0.5));
+        /* the last line has landed -> play it. Scrolling back into the story re-arms it. */
+        if (over <= 0.005) { octaArmed = true; if (octaState === 'done') octaState = 'idle'; }
+        else if (octaState === 'idle' && octaArmed && over > 0.02) startOcta();
         queue();
     }, { passive: true });
     skip.addEventListener('click', function () {
