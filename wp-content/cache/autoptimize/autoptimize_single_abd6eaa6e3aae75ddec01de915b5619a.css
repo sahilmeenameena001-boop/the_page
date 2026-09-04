@@ -226,19 +226,20 @@ html,body{overflow-x:clip}
 .tp-contact__inner{grid-template-columns:1fr;gap:2rem}
 }
 /* === TP booking page === */
-.tpb-hero{background:#08361A;text-align:center;padding:7.5rem 1.5rem 3.2rem}
+.tpb-hero{position:relative;isolation:isolate;text-align:center;padding:calc(var(--tp-header-h,7rem) + 2.5rem) 1.5rem 7rem;background:#08361A url("../../../images/house/lobby-atrium.jpg") center 38%/cover no-repeat}
+.tpb-hero:before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(8,54,26,.90) 0%,rgba(8,54,26,.66) 45%,rgba(8,54,26,.94) 100%)}
 .tpb-eyebrow{font-size:.72rem;letter-spacing:.42em;text-indent:.42em;color:#FFC371;margin:0}
 .tpb-title{font-family:"ABC Arizona Flare",serif;font-weight:400;font-size:clamp(2.4rem,5vw,3.8rem);color:#F5E1CB;margin:.9rem 0 0}
 .tpb-title em{font-style:italic;color:#FFC371}
 .tpb-sub{color:rgba(245,225,203,.85);max-width:34rem;margin:1rem auto 0;line-height:1.6}
-.tpb-barwrap{padding:0 1.5rem;background:linear-gradient(180deg,#08361A 0%,#08361A 50%,transparent 50%)}
-.tpb-bar{max-width:56rem;margin:0 auto;background:#F5E1CB;border:1px solid rgba(255,195,113,.9);box-shadow:0 18px 50px rgba(8,54,26,.25);display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:1rem;align-items:end;padding:1.2rem 1.4rem}
+.tpb-barwrap{padding:0 1.5rem;position:relative;z-index:2;margin-top:-4.5rem}
+.tpb-bar{max-width:64rem;margin:0 auto;background:#F5E1CB;border:1px solid rgba(255,195,113,.9);box-shadow:0 18px 50px rgba(8,54,26,.25);display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:1rem;align-items:end;padding:1.2rem 1.4rem}
 .tpb-field{display:flex;flex-direction:column;gap:.45rem}
 .tpb-field span{font-size:.62rem;letter-spacing:.3em;text-indent:.3em;color:#2E6343}
 .tpb-field input,.tpb-field select{border:1px solid #2E6343;background:#fff;color:#08391B;padding:.7rem .8rem;font-family:inherit;font-size:.95rem;border-radius:0;width:100%;box-sizing:border-box}
 .tpb-field input:focus,.tpb-field select:focus{outline:2px solid #FFC371;outline-offset:1px}
 .tpb-nights{font-family:"ABC Arizona Flare",serif;font-size:1.1rem;color:#08391B;padding:.7rem .4rem;white-space:nowrap}
-.tpb-rooms{max-width:64rem;margin:0 auto;padding:3rem 1.5rem 4.5rem;display:flex;flex-direction:column;gap:2.2rem}
+.tpb-rooms{max-width:67rem;margin:0 auto;padding:3rem 1.5rem 4.5rem;display:flex;flex-direction:column;gap:2.2rem}
 .tpb-card{display:grid;grid-template-columns:19rem 1fr;background:#fff;border:1px solid rgba(46,99,67,.25);box-shadow:0 10px 36px rgba(8,54,26,.1);overflow:hidden;transition:transform .5s cubic-bezier(.22,1,.36,1),box-shadow .5s ease}
 .tpb-card:hover{transform:translateY(-4px);box-shadow:0 22px 54px rgba(8,54,26,.18)}
 .tpb-card__photo{position:relative;min-height:15rem}
@@ -270,7 +271,7 @@ html,body{overflow-x:clip}
 .tpb-card__body{padding:1.2rem 1.25rem}
 .tpb-plan{flex-direction:column;gap:.8rem}
 .tpb-plan__price{align-items:flex-start;text-align:left}
-.tpb-hero{padding:6.5rem 1.25rem 2.6rem}
+.tpb-hero{padding:calc(var(--tp-header-h,7rem) + 1.5rem) 1.25rem 6rem}
 }
 /* === TP header CTAs === */
 .site-header .container{position:relative}
@@ -394,3 +395,28 @@ image-reveal{--color-lavender:var(--color-bg);--color-muted-woad:var(--color-bg)
 
 /* === subpage hero clears the fixed header, so the title never sits under the wordmark === */
 .hero--full .hero-content{padding-top:calc(var(--tp-header-h,7rem) + 1rem)}
+
+/* === booking page: WhatsApp fallback and the reservations help panel === */
+.tpb-wa{margin-top:.5rem;font-size:.74rem;letter-spacing:.04em;color:#2E6343;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.tpb-wa:hover{color:#08391B}
+.tpb-help{max-width:64rem;margin:2.5rem auto 0;padding:2.2rem 2rem;background:#08361A;color:#F5E1CB;display:grid;grid-template-columns:1.15fr 1fr;gap:2.5rem}
+.tpb-help h3{font-family:"ABC Arizona Flare",serif;font-weight:400;font-size:1.35rem;color:#F5E1CB;margin:0 0 .7rem}
+.tpb-help p{color:rgba(245,225,203,.82);line-height:1.65;margin:0 0 1.2rem;font-size:.95rem}
+.tpb-help__actions{display:flex;flex-wrap:wrap;gap:.6rem}
+.tpb-help__btn{background:#FFC371;color:#08391B;border:1px solid #FFC371;padding:.6rem 1.1rem;font-size:.68rem;letter-spacing:.2em;text-indent:.2em;text-transform:uppercase;text-decoration:none;transition:all .35s ease;white-space:nowrap}
+.tpb-help__btn:hover{transform:translateY(-2px)}
+.tpb-help__btn--ghost{background:none;color:#F5E1CB;border-color:rgba(245,225,203,.45);text-transform:none;letter-spacing:.06em;text-indent:0}
+.tpb-help__btn--ghost:hover{border-color:#FFC371;color:#FFC371}
+.tpb-facts{margin:0;display:grid;grid-template-columns:auto 1fr;gap:.55rem 1.1rem;font-size:.9rem}
+.tpb-facts dt{color:#FFC371;letter-spacing:.06em;white-space:nowrap}
+.tpb-facts dd{margin:0;color:rgba(245,225,203,.86)}
+@media (max-width:860px){.tpb-help{grid-template-columns:1fr;gap:1.8rem;padding:1.7rem 1.3rem}.tpb-help__btn{width:100%;text-align:center}}
+
+/* booking hero sits on the same 64rem measure as the bar, the cards and the help panel */
+.tpb-eyebrow,.tpb-title{max-width:64rem;margin-inline:auto}
+.tpb-sub{max-width:38rem}
+@media (max-width:860px){.tpb-hero{padding:calc(var(--tp-header-h,7rem) + 1.5rem) 1.25rem 6rem}.tpb-barwrap{margin-top:-4rem}}
+
+/* grid children default to min-width:auto, which let the date inputs push past the bar */
+.tpb-field{min-width:0}
+.tpb-field input,.tpb-field select{max-width:100%}
