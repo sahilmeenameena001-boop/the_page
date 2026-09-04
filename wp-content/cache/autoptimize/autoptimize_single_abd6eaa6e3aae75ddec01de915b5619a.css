@@ -385,3 +385,12 @@ html.tp-anim .tp-reveal{filter:none;transform:none}
 html.tp-vt-back::view-transition-old(root){animation:tpPageFall .58s cubic-bezier(.76,0,.24,1) both;z-index:1;box-shadow:0 -30px 60px rgba(24,17,10,.32)}
 html.tp-vt-back::view-transition-new(root){animation:tpPageLift .58s cubic-bezier(.22,1,.36,1) both;z-index:0;box-shadow:none}
 @media (prefers-reduced-motion:reduce){::view-transition-group(root),::view-transition-old(root),::view-transition-new(root){animation:none !important}}
+
+/* === image-reveal curtain: never flash gold while a picture loads ===
+   The component paints color="lavender"/"muted-woad" over the image until it reveals,
+   and the brand palette maps those to gold and green. Painting the curtain in the page
+   background instead means a slow image reads as empty page, not a loading block. */
+image-reveal{--color-lavender:var(--color-bg);--color-muted-woad:var(--color-bg)}
+
+/* === subpage hero clears the fixed header, so the title never sits under the wordmark === */
+.hero--full .hero-content{padding-top:calc(var(--tp-header-h,7rem) + 1rem)}

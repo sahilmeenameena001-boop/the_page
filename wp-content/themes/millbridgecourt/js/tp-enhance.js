@@ -612,3 +612,15 @@ window.addEventListener('wheel', function (e) {
     }
     queue();
 })();
+
+/* === publish the fixed header's height, so heroes can pad themselves clear of it === */
+(function () {
+    'use strict';
+    var header = document.querySelector('.site-header');
+    if (!header) return;
+    function setH() { document.documentElement.style.setProperty('--tp-header-h', header.offsetHeight + 'px'); }
+    setH();
+    window.addEventListener('load', setH);
+    window.addEventListener('resize', setH);
+    if (window.ResizeObserver) new ResizeObserver(setH).observe(header);
+})();
