@@ -420,3 +420,24 @@ image-reveal{--color-lavender:var(--color-bg);--color-muted-woad:var(--color-bg)
 /* grid children default to min-width:auto, which let the date inputs push past the bar */
 .tpb-field{min-width:0}
 .tpb-field input,.tpb-field select{max-width:100%}
+
+/* === FAQs and policy pages: one quiet reading column on the same measure === */
+.tpp{background:var(--color-bg);padding:4rem 1.5rem 5rem}
+.tpp-wrap{max-width:52rem;margin:0 auto}
+.tpp-kicker{color:#2E6343;font-size:1.05rem;line-height:1.7;margin:0 0 2.4rem;padding-bottom:1.8rem;border-bottom:1px solid rgba(46,99,67,.25)}
+.tpp-kicker a,.tpp-sec a,.tpp-faq__a a,.tpp-note a{color:#08391B;text-decoration:underline;text-underline-offset:3px}
+.tpp-kicker a:hover,.tpp-sec a:hover,.tpp-faq__a a:hover,.tpp-note a:hover{color:#2E6343}
+.tpp-faq{border-bottom:1px solid rgba(46,99,67,.25)}
+.tpp-faq summary{list-style:none;cursor:pointer;padding:1.25rem 2.5rem 1.25rem 0;position:relative;font-family:"ABC Arizona Flare",serif;font-size:1.18rem;color:#08391B;transition:color .3s ease}
+.tpp-faq summary::-webkit-details-marker{display:none}
+.tpp-faq summary:hover{color:#2E6343}
+.tpp-faq summary:after{content:"";position:absolute;right:.35rem;top:50%;width:.66rem;height:.66rem;border-right:1.5px solid #FFC371;border-bottom:1.5px solid #FFC371;transform:translateY(-70%) rotate(45deg);transition:transform .35s cubic-bezier(.22,1,.36,1)}
+.tpp-faq[open] summary:after{transform:translateY(-20%) rotate(-135deg)}
+.tpp-faq[open] summary{color:#2E6343}
+.tpp-faq__a{padding:0 2.5rem 1.4rem 0}
+.tpp-faq__a p{margin:0;color:#2E6343;line-height:1.75}
+.tpp-sec{padding:1.6rem 0;border-bottom:1px solid rgba(46,99,67,.18)}
+.tpp-sec h2{font-family:"ABC Arizona Flare",serif;font-weight:400;font-size:1.32rem;color:#08391B;margin:0 0 .6rem}
+.tpp-sec p{margin:0;color:#2E6343;line-height:1.75}
+.tpp-note{margin:2.2rem 0 0;color:#2E6343;font-size:.92rem;line-height:1.7}
+@media (max-width:860px){.tpp{padding:2.8rem 1.25rem 3.5rem}.tpp-faq summary{font-size:1.06rem}}
