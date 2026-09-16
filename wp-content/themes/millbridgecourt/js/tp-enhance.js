@@ -161,12 +161,9 @@ window.addEventListener('wheel', function (e) {
     var fine = window.matchMedia && window.matchMedia('(pointer: fine)').matches;
     var onHome = /(?:^|\/)(index\.html)?$/.test(location.pathname);
 
-    /* --- time-aware hero: daytime shows the daylight entrance, evening the dusk shot --- */
-    var heroImg = document.querySelector('.page-hero__bg img');
-    if (heroImg) {
-        var h = new Date().getHours();
-        if (h >= 6 && h < 17) heroImg.src = 'images/home/hero-entrance.jpg';
-    }
+    /* --- landing hero: the dusk shot, all day. The hero used to swap to the daylight
+       entrance between 06:00 and 17:00; the dusk frame is the one the house wants, so it
+       stands on its own and the octagon window opens onto it at every hour. --- */
 
     /* --- typesetter headline: letters scatter in from the tray --- */
     var title = document.querySelector('.ph-title');
