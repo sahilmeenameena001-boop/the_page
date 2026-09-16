@@ -468,7 +468,10 @@ window.addEventListener('wheel', function (e) {
     var octaMask = octa.querySelector('.tp-octa__mask');
     /* the window opens onto the very shot the landing hero is wearing (it swaps by time of day) */
     var heroShot = document.querySelector('.tp-walk__scene--entrance img');
-    octaImg.src = heroShot ? (heroShot.currentSrc || heroShot.src) : 'images/home/hero-dusk.jpg';
+    /* .src before .currentSrc: the hero is swapped by time of day above, and on an image that
+       has already loaded currentSrc keeps the OLD url until the new one finishes loading, so
+       reading it here opened the window onto the wrong shot. .src is the intended source. */
+    octaImg.src = heroShot ? (heroShot.src || heroShot.currentSrc) : 'images/home/hero-dusk.jpg';
     /* octagon size in the 4036x1672 viewBox, and how far it must grow to swallow the screen */
     var OCTA_VB_W = 4036, OCTA_VB_H = 1672, OCTA_W = 200.72, OCTA_H = 279.28, octaMax = 20;
     function measureOcta() {
