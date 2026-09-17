@@ -443,8 +443,8 @@ image-reveal{--color-lavender:var(--color-bg);--color-muted-woad:var(--color-bg)
 @media (max-width:860px){.tpp{padding:2.8rem 1.25rem 3.5rem}.tpp-faq summary{font-size:1.06rem}}
 
 /* === TP reel: scroll-driven sprite-sheet film === */
-.tp-reel{position:relative;height:420vh;background:#08361A;--tp-reel-fade:#08361A}
-.tp-reel__sticky{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;display:block}
+.tp-reel{position:relative;height:700vh;background:#08361A;--tp-reel-fade:#08361A;contain:layout paint style}
+.tp-reel__sticky{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;display:block;contain:paint;backface-visibility:hidden}
 .tp-reel__canvas,.tp-reel__poster{position:absolute;inset:0;width:100%;height:100%;display:block}
 .tp-reel__poster{object-fit:cover;object-position:center;z-index:1}
 .tp-reel__canvas{z-index:2;opacity:0;transition:opacity .7s cubic-bezier(.22,1,.36,1)}
@@ -457,7 +457,7 @@ image-reveal{--color-lavender:var(--color-bg);--color-muted-woad:var(--color-bg)
 .tp-reel__status{position:absolute;left:0;right:0;bottom:1rem;z-index:4;margin:0;text-align:center;font-size:.72rem;letter-spacing:.24em;text-transform:uppercase;color:rgba(245,225,203,.6)}
 .tp-reel__status:empty{display:none}
 @media (max-width:860px){
-.tp-reel{height:320vh}
+.tp-reel{height:520vh}
 .tp-reel__caption{bottom:clamp(1.8rem,6vh,3rem)}
 .tp-reel__eyebrow{font-size:.66rem;letter-spacing:.26em}
 .tp-reel__sticky::after{height:46%}

@@ -18,10 +18,19 @@
     'use strict';
 
     var BASE = 'assets/reel';
-    var MAX_SHEETS_FINE = 5;      /* ~40 frames / 1.7s of lookahead */
-    var MAX_SHEETS_COARSE = 3;
-    var MAX_CONCURRENT = 6;
+    var MAX_SHEETS_FINE = 4;
+    var MAX_SHEETS_COARSE = 2;
+    /* Decoding a 5120x1440 sheet costs ~180ms of CPU. Six of those in flight
+       will starve the main thread on a modest machine and the page judders -
+       which is worse than a frame arriving late, because it makes the whole
+       document scroll badly, not just this section. Two at a time. */
+    var MAX_CONCURRENT = 2;
     var MAX_FAILURES = 3;
+    /* While the reader is flicking rather than reading, speculative sheets
+       are wasted work: they are obsolete before they decode. Above this many
+       frames of travel per rendered frame, fetch only the sheet actually
+       needed to land on. */
+    var FLICK_FRAMES = 40;
 
     var root = document.querySelector('.tp-reel');
     if (!root) return;
@@ -182,6 +191,7 @@
     var started = false;
     var inView = false;
     var dead = false;
+    var maxSheets = MAX_SHEETS_FINE;
     var drawW = 0, drawH = 0;
     /* centred cover crop: scale to fill, trim evenly on both axes. On a narrow
        portrait viewport this is what keeps the subject centred instead of
@@ -203,7 +213,7 @@
         ctx.setTransform(1, 0, 0, 1, 0, 0);
         ctx.scale(dpr, dpr);
         ctx.imageSmoothingEnabled = true;
-        ctx.imageSmoothingQuality = 'high';
+        ctx.imageSmoothingQuality = 'medium';
         drawW = w;
         drawH = h;
         if (drawn >= 0) paint(drawn, true);
@@ -257,13 +267,18 @@
         if (!started || !store || count < 1) return;
 
         var target = Math.round(progress() * (count - 1));
+        var travel = 0;
         if (target !== pending) {
+            travel = Math.abs(target - pending);
             dir = (pending < 0 || target >= pending) ? 1 : -1;
             pending = target;
         }
         var sheet = Math.floor(pending / perSheet);
         if (sheet !== lastSheet) {
             lastSheet = sheet;
+            /* narrow to just this sheet while travelling fast, widen again
+               once the scroll settles */
+            store.max = (travel > FLICK_FRAMES) ? 1 : maxSheets;
             store.want(sheet, dir);
         }
         if (!paint(pending) && drawn < 0) say('Loading…');
@@ -304,8 +319,8 @@
                 count = info.count;
                 var coarse = (window.matchMedia &&
                     window.matchMedia('(pointer: coarse)').matches) || window.innerWidth < 900;
-                store = new SheetStore(variant, info, perSheet,
-                    coarse ? MAX_SHEETS_COARSE : MAX_SHEETS_FINE,
+                maxSheets = coarse ? MAX_SHEETS_COARSE : MAX_SHEETS_FINE;
+                store = new SheetStore(variant, info, perSheet, maxSheets,
                     onSheetLoaded, fail);
                 resize();
                 /* prime the first sheet at wherever the section currently sits;
