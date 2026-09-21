@@ -376,8 +376,12 @@
        you only came for what is underneath it. */
     var skip = root.querySelector('.tp-reel__skip');
     function onSkip() {
-        var past = root.offsetTop + root.offsetHeight - window.innerHeight + 2;
-        window.scrollTo({ top: past, behavior: 'auto' });
+        /* the top of whatever follows, so skipping lands on content rather
+           than on the reel's final frame with the next section below the fold */
+        var next = root.nextElementSibling;
+        var target = next ? next.offsetTop
+                          : root.offsetTop + root.offsetHeight - window.innerHeight + 2;
+        window.scrollTo({ top: target, behavior: 'auto' });
     }
     if (skip) skip.addEventListener('click', onSkip);
 

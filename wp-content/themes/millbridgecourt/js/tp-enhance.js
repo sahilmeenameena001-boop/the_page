@@ -608,7 +608,13 @@ window.addEventListener('wheel', function (e) {
         octa.style.display = 'none';
         document.documentElement.classList.remove('tp-story-boot');
         if (hcta) hcta.style.opacity = 1;
-        window.scrollTo({ top: story.offsetTop + story.offsetHeight - window.innerHeight + 2, behavior: 'auto' });
+        /* land on the top of what comes next, not on the story's last pixel -
+           stopping at the end of the story leaves its tail filling the screen
+           with the hero pushed below the fold. */
+        var next = story.nextElementSibling;
+        var target = next ? next.offsetTop
+                          : story.offsetTop + story.offsetHeight - window.innerHeight + 2;
+        window.scrollTo({ top: target, behavior: 'auto' });
     });
     if (window.matchMedia('(pointer: fine)').matches) {
         story.addEventListener('pointermove', function (e) {

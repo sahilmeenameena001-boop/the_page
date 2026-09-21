@@ -510,9 +510,17 @@ image-reveal{--color-lavender:var(--color-bg);--color-muted-woad:var(--color-bg)
 }
 
 /* === Skip out of the reel === */
-.tp-reel__skip{position:absolute;right:clamp(1rem,3vw,2rem);bottom:clamp(1rem,3vw,2rem);z-index:5;display:inline-flex;align-items:center;gap:.5rem;padding:.5rem 1.05rem;border:1px solid rgba(245,225,203,.45);border-radius:999px;background:rgba(4,30,14,.45);color:#F5E1CB;font:inherit;font-size:.68rem;letter-spacing:.24em;text-transform:uppercase;cursor:pointer;transition:background .35s ease,color .35s ease,border-color .35s ease}
+.tp-reel__skip{position:absolute;right:clamp(1rem,3vw,2rem);top:clamp(9.5rem,21vh,12rem);z-index:6;display:inline-flex;align-items:center;gap:.5rem;padding:.5rem 1.05rem;border:1px solid rgba(245,225,203,.45);border-radius:999px;background:rgba(4,30,14,.45);color:#F5E1CB;font:inherit;font-size:.68rem;letter-spacing:.24em;text-transform:uppercase;cursor:pointer;transition:background .35s ease,color .35s ease,border-color .35s ease}
 .tp-reel__skip svg{width:.6rem;height:.85rem;flex:none}
 .tp-reel__skip:hover,.tp-reel__skip:focus-visible{background:#FFC371;color:#08391B;border-color:#FFC371}
 .tp-reel__skip:focus-visible{outline:2px solid #F5E1CB;outline-offset:3px}
 .tp-reel[data-reel-state="static"] .tp-reel__skip{display:none}
 @media (prefers-reduced-motion:reduce){.tp-reel__skip{transition:none}}
+
+/* === Story skip: it sits inside .tp-story__stage with z-index auto, and a
+   later sibling in the same stacking context painted over it, so real clicks
+   landed on the stage and the button only ever worked when a script called
+   .click() on it directly. Lift it and make sure it takes the pointer. === */
+.tp-story__skip{position:absolute;z-index:8;pointer-events:auto}
+.tp-story__stage>*:not(.tp-story__skip){pointer-events:none}
+.tp-story__skip:focus-visible{outline:2px solid #F5E1CB;outline-offset:3px}
