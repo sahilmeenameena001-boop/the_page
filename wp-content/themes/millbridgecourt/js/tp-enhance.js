@@ -377,6 +377,35 @@ window.addEventListener('wheel', function (e) {
             else { play(); }
         });
 
+        /* Tear the audio down when the page goes away. Suspending on
+           visibilitychange is not enough on its own: this site navigates with
+           cross-document view transitions and pages can be put in the back/
+           forward cache rather than destroyed, so a document can be frozen
+           with oscillators still scheduled while the next page builds a second
+           context of its own. close() releases the hardware outright, and the
+           scheduled envelopes - which otherwise ring on for up to nine seconds
+           after the last note is triggered - die with it.
+
+           pagehide rather than beforeunload: beforeunload is unreliable on
+           mobile, where the tab is usually backgrounded and discarded rather
+           than closed, which is exactly the case being reported. */
+        function killAudio() {
+            stopLoop();
+            if (ctx) {
+                try { ctx.close(); } catch (err) {}
+                ctx = null;
+                master = null;
+            }
+        }
+        window.addEventListener('pagehide', killAudio);
+        document.addEventListener('freeze', killAudio);
+
+        /* Coming back from the back/forward cache starts from nothing, so
+           rebuild rather than resume a context that no longer exists. */
+        window.addEventListener('pageshow', function (e) {
+            if (e.persisted && booted && !muted && !document.hidden) play();
+        });
+
         btn.addEventListener('click', function (e) {
             e.stopPropagation();
             muted = !muted;
