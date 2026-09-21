@@ -467,3 +467,29 @@ image-reveal{--color-lavender:var(--color-bg);--color-muted-woad:var(--color-bg)
 .tp-reel__sticky{position:relative;height:clamp(60vh,70vw,80vh)}
 .tp-reel__canvas{display:none}
 }
+
+/* === TP halls: three rooms, each opening onto its own page === */
+.tp-halls{padding-block:clamp(3rem,7vw,5.5rem);background:#F5E1CB}
+.tp-halls__intro{max-width:44rem;margin:0 auto clamp(2rem,4vw,3.2rem);text-align:center}
+.tp-halls__eyebrow{margin:0 0 .6rem;font-size:.72rem;letter-spacing:.32em;text-transform:uppercase;color:#2E6343}
+.tp-halls__title{margin:0 0 .9rem;font-family:"ABC Arizona Flare",serif;font-weight:500;font-size:clamp(1.5rem,3vw,2.4rem);letter-spacing:.05em;line-height:1.25;color:#08361A;text-wrap:balance}
+.tp-halls__lede{margin:0;color:#2E6343;line-height:1.7;font-size:1.02rem}
+.tp-halls__grid{list-style:none;margin:0;padding:0;display:grid;gap:clamp(1.4rem,3vw,2.2rem);grid-template-columns:repeat(auto-fit,minmax(min(100%,19rem),1fr))}
+.tp-halls__card{display:flex}
+.tp-halls__link{display:flex;flex-direction:column;width:100%;text-decoration:none;color:inherit;background:#fff;border:1px solid rgba(46,99,67,.16);overflow:hidden;transition:transform .5s cubic-bezier(.22,1,.36,1),box-shadow .5s cubic-bezier(.22,1,.36,1),border-color .4s ease}
+.tp-halls__frame{display:block;aspect-ratio:4/3;overflow:hidden;background:#08361A}
+.tp-halls__frame img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .7s cubic-bezier(.22,1,.36,1)}
+.tp-halls__body{display:flex;flex-direction:column;gap:.55rem;padding:clamp(1.1rem,2.2vw,1.5rem)}
+.tp-halls__name{font-family:"ABC Arizona Flare",serif;font-size:1.3rem;letter-spacing:.09em;text-transform:uppercase;color:#08361A}
+.tp-halls__note{color:#2E6343;line-height:1.62;font-size:.97rem}
+.tp-halls__cue{margin-top:.35rem;font-size:.74rem;letter-spacing:.24em;text-transform:uppercase;color:#2E6343;display:inline-flex;align-items:center;gap:.5rem}
+.tp-halls__cue::after{content:"";width:1.6rem;height:1px;background:currentColor;transition:width .4s cubic-bezier(.22,1,.36,1)}
+.tp-halls__link:hover,.tp-halls__link:focus-visible{transform:translateY(-4px);box-shadow:0 18px 40px -22px rgba(8,54,26,.55);border-color:rgba(255,195,113,.7)}
+.tp-halls__link:hover .tp-halls__frame img,.tp-halls__link:focus-visible .tp-halls__frame img{transform:scale(1.05)}
+.tp-halls__link:hover .tp-halls__cue::after,.tp-halls__link:focus-visible .tp-halls__cue::after{width:2.6rem}
+.tp-halls__link:focus-visible{outline:2px solid #08361A;outline-offset:3px}
+@media (prefers-reduced-motion:reduce){
+.tp-halls__link,.tp-halls__frame img,.tp-halls__cue::after{transition:none}
+.tp-halls__link:hover{transform:none}
+.tp-halls__link:hover .tp-halls__frame img{transform:none}
+}
