@@ -371,6 +371,16 @@
         }
     }, 500);
 
+    /* Skip: jump clear of the whole section rather than scrubbing out of it.
+       The reel is five viewports tall, which is a long way to scroll past if
+       you only came for what is underneath it. */
+    var skip = root.querySelector('.tp-reel__skip');
+    function onSkip() {
+        var past = root.offsetTop + root.offsetHeight - window.innerHeight + 2;
+        window.scrollTo({ top: past, behavior: 'auto' });
+    }
+    if (skip) skip.addEventListener('click', onSkip);
+
     window.addEventListener('resize', resize, { passive: true });
     window.addEventListener('orientationchange', resize, { passive: true });
 
@@ -395,6 +405,7 @@
         if (dead) return;
         dead = true;
         inView = false;
+        if (skip) skip.removeEventListener('click', onSkip);
         window.removeEventListener('resize', resize);
         window.removeEventListener('orientationchange', resize);
         window.removeEventListener('pagehide', teardown);

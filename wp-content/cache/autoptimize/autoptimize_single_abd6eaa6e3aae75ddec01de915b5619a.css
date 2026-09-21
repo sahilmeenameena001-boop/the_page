@@ -431,7 +431,8 @@ image-reveal{--color-lavender:var(--color-bg);--color-muted-woad:var(--color-bg)
 .tpp-faq summary{list-style:none;cursor:pointer;padding:1.25rem 2.5rem 1.25rem 0;position:relative;font-family:"ABC Arizona Flare",serif;font-size:1.18rem;color:#08391B;transition:color .3s ease}
 .tpp-faq summary::-webkit-details-marker{display:none}
 .tpp-faq summary:hover{color:#2E6343}
-.tpp-faq summary:after{content:"";position:absolute;right:.35rem;top:50%;width:.66rem;height:.66rem;border-right:1.5px solid #FFC371;border-bottom:1.5px solid #FFC371;transform:translateY(-70%) rotate(45deg);transition:transform .35s cubic-bezier(.22,1,.36,1)}
+.tpp-faq summary:hover:after,.tpp-faq[open] summary:after{border-color:#08391B}
+.tpp-faq summary:after{content:"";position:absolute;right:.35rem;top:50%;width:.8rem;height:.8rem;border-right:2.5px solid #2E6343;border-bottom:2.5px solid #2E6343;transform:translateY(-70%) rotate(45deg);transition:transform .35s cubic-bezier(.22,1,.36,1),border-color .3s ease}
 .tpp-faq[open] summary:after{transform:translateY(-20%) rotate(-135deg)}
 .tpp-faq[open] summary{color:#2E6343}
 .tpp-faq__a{padding:0 2.5rem 1.4rem 0}
@@ -500,3 +501,18 @@ image-reveal{--color-lavender:var(--color-bg);--color-muted-woad:var(--color-bg)
 .tp-halls__link:hover .tp-halls__img{transform:none}
 .tp-halls__link:hover .tp-halls__cta svg{transform:none}
 }
+
+/* === Header: the emblem sits in a button nudged 56px right, which on a narrow
+   viewport carried it into the centred wordmark. Hold it in its own column. === */
+@media (max-width:600px){
+.site-header .btn--menu-trigger{transform:none!important}
+.site-header .site-logo-mobile{max-width:min(46vw,9.2rem)}
+}
+
+/* === Skip out of the reel === */
+.tp-reel__skip{position:absolute;right:clamp(1rem,3vw,2rem);bottom:clamp(1rem,3vw,2rem);z-index:5;display:inline-flex;align-items:center;gap:.5rem;padding:.5rem 1.05rem;border:1px solid rgba(245,225,203,.45);border-radius:999px;background:rgba(4,30,14,.45);color:#F5E1CB;font:inherit;font-size:.68rem;letter-spacing:.24em;text-transform:uppercase;cursor:pointer;transition:background .35s ease,color .35s ease,border-color .35s ease}
+.tp-reel__skip svg{width:.6rem;height:.85rem;flex:none}
+.tp-reel__skip:hover,.tp-reel__skip:focus-visible{background:#FFC371;color:#08391B;border-color:#FFC371}
+.tp-reel__skip:focus-visible{outline:2px solid #F5E1CB;outline-offset:3px}
+.tp-reel[data-reel-state="static"] .tp-reel__skip{display:none}
+@media (prefers-reduced-motion:reduce){.tp-reel__skip{transition:none}}

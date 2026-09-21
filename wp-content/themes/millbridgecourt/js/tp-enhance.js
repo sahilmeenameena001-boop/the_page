@@ -595,12 +595,20 @@ window.addEventListener('wheel', function (e) {
         sp = clamp01(-r.top / span);
         over = clamp01((-r.top - span * 0.94) / (span * 0.06 + window.innerHeight * 0.5));
         /* the last line has landed -> play it. Scrolling back into the story re-arms it. */
-        if (over <= 0.005) { octaArmed = true; if (octaState === 'done') octaState = 'idle'; }
+        if (over <= 0.005) { octaArmed = true; octa.style.display = ''; if (octaState === 'done') octaState = 'idle'; }
         else if (octaState === 'idle' && octaArmed && over > 0.02) startOcta();
         queue();
     }, { passive: true });
     skip.addEventListener('click', function () {
-        window.scrollTo({ top: story.offsetTop + story.offsetHeight - window.innerHeight + 2, behavior: 'smooth' });
+        /* Skip means skip. Smooth-scrolling to the end of the story only handed
+           the reader to the 2.8s octagon reveal, so the button appeared to do
+           nothing for three seconds. Jump, and retire the reveal with it. */
+        octaState = 'done';
+        octaArmed = false;
+        octa.style.display = 'none';
+        document.documentElement.classList.remove('tp-story-boot');
+        if (hcta) hcta.style.opacity = 1;
+        window.scrollTo({ top: story.offsetTop + story.offsetHeight - window.innerHeight + 2, behavior: 'auto' });
     });
     if (window.matchMedia('(pointer: fine)').matches) {
         story.addEventListener('pointermove', function (e) {
