@@ -534,3 +534,13 @@ image-reveal{--color-lavender:var(--color-bg);--color-muted-woad:var(--color-bg)
 .blocks .container.inner{row-gap:clamp(1.5rem,5vw,2.25rem)}
 .blocks .block--image-text{padding-block:clamp(1.4rem,4vw,2rem)}
 }
+
+/* === Blocks: keep a picture inside its own frame ===
+   image-reveal animates its picture with a transform and both it and its
+   wrapper were overflow:visible, so mid-reveal the image spilled out of its
+   own box and across the heading of the block below it. Clip it to the frame,
+   and let the writing sit above the pictures regardless. === */
+.blocks .image,.blocks image-reveal{overflow:hidden}
+.blocks .block__content{position:relative;z-index:2}
+.blocks .block--image-text{position:relative;isolation:isolate}
+.blocks .images{position:relative;z-index:1}
