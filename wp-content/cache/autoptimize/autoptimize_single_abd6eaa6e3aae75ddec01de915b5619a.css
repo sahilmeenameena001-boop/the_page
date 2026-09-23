@@ -544,3 +544,13 @@ image-reveal{--color-lavender:var(--color-bg);--color-muted-woad:var(--color-bg)
 .blocks .block__content{position:relative;z-index:2}
 .blocks .block--image-text{position:relative;isolation:isolate}
 .blocks .images{position:relative;z-index:1}
+
+/* reel skip: double chevron, sized for the new glyph */
+.tp-reel__skip svg{width:.95rem;height:.95rem;flex:none;transition:transform .4s cubic-bezier(.22,1,.36,1)}
+.tp-reel__skip:hover svg,.tp-reel__skip:focus-visible svg{transform:translateY(2px)}
+
+/* Blocks, belt and braces: give image-reveal a defined box even before its
+   custom element upgrades, so a slow or failed script cannot leave the
+   picture laid over the writing during load. */
+.blocks image-reveal{display:block;position:relative;contain:layout paint}
+.blocks .images{display:block;position:relative;z-index:1}
