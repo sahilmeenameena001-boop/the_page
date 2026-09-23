@@ -482,6 +482,14 @@ window.addEventListener('wheel', function (e) {
     var glow = story.querySelector('.tp-story__glow');
     var hcta = document.querySelector('.tp-hcta');
     var n = beats.length, span = 1, queued = false, sp = 0, over = 0, tiltX = 0, tiltY = 0;
+    /* sp follows the scroll position rather than tracking it exactly. A wheel
+       notch moves the scroll in one jump, and driving the beats straight off
+       that makes them step; easing toward it turns each notch into a short
+       glide. spTarget is where the scroll says we are, sp is where the story
+       has got to. */
+    var spTarget = 0, octaTimer = 0;
+    var OCTA_DELAY = 2500;   /* the last line is allowed to land and be read */
+    var SP_EASE = 0.16;
     /* octagon intro: a cream sheet closes over the story, then its window opens onto the hero */
     var octa = document.createElement('div');
     octa.className = 'tp-octa';
@@ -530,7 +538,7 @@ window.addEventListener('wheel', function (e) {
         if (octaP < 1) { requestAnimationFrame(octaTick); return; }
         octaState = 'done';
         var re = story.getBoundingClientRect();   /* resync the scroll figures we held frozen */
-        sp = clamp01(-re.top / span);
+        sp = spTarget = clamp01(-re.top / span);   /* initial sync, no easing */
         over = clamp01((-re.top - span * 0.94) / (span * 0.06 + window.innerHeight * 0.5));
         queue();
     }
@@ -544,6 +552,9 @@ window.addEventListener('wheel', function (e) {
     function measure() { span = Math.max(1, story.offsetHeight - window.innerHeight); }
     function frame() {
         queued = false;
+        sp += (spTarget - sp) * SP_EASE;
+        if (Math.abs(spTarget - sp) < 0.0004) sp = spTarget;
+        else queue();                 /* keep easing until it has caught up */
         var p = sp;
         var peakVis = 0;
         for (var i = 0; i < n; i++) {
@@ -621,11 +632,28 @@ window.addEventListener('wheel', function (e) {
             return;
         }
         var r = story.getBoundingClientRect();
-        sp = clamp01(-r.top / span);
+        spTarget = clamp01(-r.top / span);
         over = clamp01((-r.top - span * 0.94) / (span * 0.06 + window.innerHeight * 0.5));
         /* the last line has landed -> play it. Scrolling back into the story re-arms it. */
-        if (over <= 0.005) { octaArmed = true; octa.style.display = ''; if (octaState === 'done') octaState = 'idle'; }
-        else if (octaState === 'idle' && octaArmed && over > 0.02) startOcta();
+        if (over <= 0.005) {
+            octaArmed = true;
+            octa.style.display = '';
+            if (octaTimer) { clearTimeout(octaTimer); octaTimer = 0; }
+            if (octaState === 'done') octaState = 'idle';
+        } else if (octaState === 'idle' && octaArmed && over > 0.02 && !octaTimer) {
+            /* Let the final line sit for a beat before the window opens. Firing
+               the moment it lands gave no pause between reading it and the
+               reveal starting. */
+            octaTimer = setTimeout(function () {
+                octaTimer = 0;
+                if (octaState !== 'idle' || !octaArmed) return;
+                /* only abandon if the reader has genuinely left the story behind.
+                   A reader who stops on the last line sits near 0; one who keeps
+                   scrolling through the hold should still get the reveal. */
+                if (over > 0.9) { octaState = 'done'; return; }
+                startOcta();
+            }, OCTA_DELAY);
+        }
         queue();
     }, { passive: true });
     skip.addEventListener('click', function () {
@@ -634,6 +662,7 @@ window.addEventListener('wheel', function (e) {
            nothing for three seconds. Jump, and retire the reveal with it. */
         octaState = 'done';
         octaArmed = false;
+        if (octaTimer) { clearTimeout(octaTimer); octaTimer = 0; }
         octa.style.display = 'none';
         document.documentElement.classList.remove('tp-story-boot');
         if (hcta) hcta.style.opacity = 1;

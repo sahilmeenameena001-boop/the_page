@@ -524,3 +524,13 @@ image-reveal{--color-lavender:var(--color-bg);--color-muted-woad:var(--color-bg)
 .tp-story__skip{position:absolute;z-index:8;pointer-events:auto}
 .tp-story__stage>*:not(.tp-story__skip){pointer-events:none}
 .tp-story__skip:focus-visible{outline:2px solid #F5E1CB;outline-offset:3px}
+
+/* === Blocks: room at the top so a jump-landing does not tuck the first block
+   under the fixed header, and a real gap between picture and writing when the
+   pair stacks on a phone. === */
+.blocks{scroll-margin-top:clamp(8rem,17vh,10rem)}
+.blocks>.block--image-text:first-child{padding-block-start:clamp(2rem,5vw,3.25rem)}
+@media (max-width:860px){
+.blocks .container.inner{row-gap:clamp(1.5rem,5vw,2.25rem)}
+.blocks .block--image-text{padding-block:clamp(1.4rem,4vw,2rem)}
+}

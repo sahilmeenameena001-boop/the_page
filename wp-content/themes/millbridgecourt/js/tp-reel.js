@@ -379,7 +379,13 @@
         /* the top of whatever follows, so skipping lands on content rather
            than on the reel's final frame with the next section below the fold */
         var next = root.nextElementSibling;
-        var target = next ? next.offsetTop
+        /* The header is fixed and about 130px tall, so landing exactly on the
+           next section's top tucks its first block underneath it - the image
+           and the writing appear to run into each other. Stop short by the
+           header's own height. */
+        var hdr = document.querySelector('.site-header');
+        var off = hdr ? hdr.getBoundingClientRect().height : 0;
+        var target = next ? Math.max(0, next.offsetTop - off - 12)
                           : root.offsetTop + root.offsetHeight - window.innerHeight + 2;
         window.scrollTo({ top: target, behavior: 'auto' });
     }
