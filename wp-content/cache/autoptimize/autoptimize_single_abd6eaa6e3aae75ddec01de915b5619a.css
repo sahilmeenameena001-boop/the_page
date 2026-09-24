@@ -555,10 +555,10 @@ image-reveal{--color-lavender:var(--color-bg);--color-muted-woad:var(--color-bg)
 .blocks image-reveal{display:block;position:relative;contain:layout paint}
 .blocks .images{display:block;position:relative;z-index:1}
 
-/* Instagram strip. Fifteen photos run as three panels, so the moving track
-   is long; on phones it is kept short enough that Safari keeps it as one
-   composited layer instead of dropping tiles mid-scroll. Durations keep the
-   pace near 55px/s at both sizes. */
-.block--instagram{--marquee-duration:120s}
+/* Instagram strip. Fourteen photos run as two panels of ten; on phones the
+   track is kept short enough that Safari keeps it as one composited layer
+   instead of dropping tiles mid-scroll. Durations keep the pace near
+   55px/s at both sizes. */
+.block--instagram{--marquee-duration:80s}
 .block--instagram .block__track{will-change:transform;backface-visibility:hidden}
-@media (width<768px){.block--instagram{--image-height:10.5rem;--marquee-duration:80s}}
+@media (width<768px){.block--instagram{--image-height:10.5rem;--marquee-duration:53s}}
